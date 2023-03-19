@@ -11,7 +11,7 @@ lines = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, "a", "b", "c", "d", "e", "f"]
 download_url = os.environ.get("PACK_URL")
 with urlopen(download_url) as zipresp:
     with ZipFile(BytesIO(zipresp.read())) as zfile:
-        zfile.extractall("pack/")
+        zfile.extractall('pack/')
 
 def create_empty(glyph):
     if not os.path.exists(f"images/{glyph}"):
