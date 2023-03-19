@@ -1,13 +1,17 @@
 from PIL import Image
 from sprite import sprite
-import dload
+from io import BytesIO
+from urllib.request import urlopen
+from zipfile import ZipFile
 import glob, os, math, time, shutil, json, re, itertools, time
 
 blankimg = 'blank256.png'
 lines = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, "a", "b", "c", "d", "e", "f"]
 
 download_url = os.environ.get("PACK_URL")
-dload.save_unzip(download_url, "pack/")
+with urlopen(download_url) as zipresp:
+    with ZipFile(BytesIO(zipresp.read())) as zfile:
+        zfile.extractall("pack/")
 
 def create_empty(glyph):
     if not os.path.exists(f"images/{glyph}"):
