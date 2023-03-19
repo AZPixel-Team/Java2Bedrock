@@ -75,7 +75,6 @@ jobs:
         run: |
           sudo apt-get install -y moreutils zip
           yarn global add spritesheet-js
-          pip install dload
           pip install Pillow
       - name: Convert Pack
         id: convert-pack
