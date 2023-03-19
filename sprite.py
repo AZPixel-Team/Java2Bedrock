@@ -19,7 +19,6 @@ def sprite(glyph):
         try:
             with Image.open(f"export/{glyph}/{current_file}") as im:
                 frames.append(im.getdata())
-                print(im.getdata)
         except:
             print(current_file + " is not a valid image")
     tile_width = frames[0].size[0]
