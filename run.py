@@ -1,17 +1,19 @@
 from PIL import Image
 from sprite import sprite
 from io import BytesIO
-from urllib.request import urlopen
 from zipfile import ZipFile
-import glob, os, math, time, shutil, json, re, itertools, time
+import glob, os, math, time, shutil, json, re, itertools, time, requests
 
 blankimg = 'blank256.png'
 lines = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, "a", "b", "c", "d", "e", "f"]
 
-download_url = os.environ.get("PACK_URL")
-with urlopen(download_url) as zipresp:
-    with ZipFile(BytesIO(zipresp.read())) as zfile:
-        zfile.extractall('pack/')
+def downloadpack(url):
+    req = requests.get(url)
+    zipfile = ZipFile(BytesIO(req.content))
+    zipfile.extractall('pack/')
+    print("Download Done")
+
+downloadpack(os.environ.get("PACK_URL"))
 
 def create_empty(glyph):
     if not os.path.exists(f"images/{glyph}"):
@@ -68,17 +70,23 @@ def converterpack(glyph):
             symbolcheck = symbolac[:2]
             if (symbolcheck.upper()) == (glyph.upper()):
                 if ":" in path:
-                    namespace = path.split(":")[0]
-                    pathnew = path.split(":")[1]
-                    imagefont = Image.open(f"pack/assets/{namespace}/textures/{pathnew}")
-                    image = imagefont.copy()
-                    os.remove(f"images/{glyph}/0x{glyph}{symbol}.png")
-                    image.save(f"images/{glyph}/0x{glyph}{symbol}.png", "PNG")
+                    try:
+                        namespace = path.split(":")[0]
+                        pathnew = path.split(":")[1]
+                        imagefont = Image.open(f"pack/assets/{namespace}/textures/{pathnew}")
+                        image = imagefont.copy()
+                        os.remove(f"images/{glyph}/0x{glyph}{symbol}.png")
+                        image.save(f"images/{glyph}/0x{glyph}{symbol}.png", "PNG")
+                    except:
+                        pass
                 else:
-                    imagefont = Image.open(f"pack/assets/minecraft/textures/{path}")
-                    image = imagefont.copy()
-                    os.remove(f"images/{glyph}/0x{glyph}{symbol}.png")
-                    image.save(f"images/{glyph}/0x{glyph}{symbol}.png", "PNG")
+                    try:
+                        imagefont = Image.open(f"pack/assets/minecraft/textures/{path}")
+                        image = imagefont.copy()
+                        os.remove(f"images/{glyph}/0x{glyph}{symbol}.png")
+                        image.save(f"images/{glyph}/0x{glyph}{symbol}.png", "PNG")
+                    except:
+                        pass
             else:
                 continue
         else:
