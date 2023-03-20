@@ -76,6 +76,7 @@ jobs:
           sudo apt-get install -y moreutils zip
           yarn global add spritesheet-js
           pip install Pillow
+          pip install requests
       - name: Convert Pack
         id: convert-pack
         continue-on-error: false
