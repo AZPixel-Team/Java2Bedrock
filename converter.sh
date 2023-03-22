@@ -1158,6 +1158,7 @@ else
   status_message completion "Archived scratch files\n"
 fi
 
+mogrify -channel A -fx 'a > (1/255) ? rgb(150,150,150) : u' -define png:preserve-colormap=true target/rp/textures/geyser/geyser_custom/*.png
 
 status_message process "Compressing output packs"
 mkdir ./target/packaged
