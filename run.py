@@ -122,4 +122,7 @@ def converterpack(glyph):
             sprite(glyph, glyphsize, size)
             
 for glyph in glyphs:
-    converterpack(glyph)
+    try:
+        converterpack(glyph)
+    except:
+        pass
