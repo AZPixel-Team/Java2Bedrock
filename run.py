@@ -43,10 +43,13 @@ def imagetoexport(glyph):
         image_copy.paste(logo, position)
         image_copy.save(f"export/{glyph}/{img}")
         
-with open("pack/assets/minecraft/font/default.json", "r") as f:
-    data = json.load(f)
-    symbols = [d['chars'] for d in data['providers']]
-    paths = [d['file'] for d in data['providers']]
+try:
+    with open("pack/assets/minecraft/font/default.json", "r") as f:
+        data = json.load(f)
+        symbols = [d['chars'] for d in data['providers']]
+        paths = [d['file'] for d in data['providers']]
+except:
+    exit()
     
 glyphs = []
 for i in symbols:
