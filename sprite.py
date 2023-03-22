@@ -1,13 +1,23 @@
-def sprite(glyph):
+def sprite(glyph, spritesheet = None, tile = None):
     from PIL import Image
     import os, math, time
     max_frames_row = 16.0
     frames = []
-    tile_width = 256
-    tile_height = 256
-
-    spritesheet_width = 4096
-    spritesheet_height = 4096
+    
+    tile_width = None
+    tile_height = None
+    spritesheet_width = None
+    spritesheet_height = None
+    if tile_width or tile_height or spritesheet_width or spritesheet_height == None:
+        tile_width = 256
+        tile_height = 256
+        spritesheet_width = 4096
+        spritesheet_height = 4096
+    else:
+        tile_width = tile
+        tile_height = tile
+        spritesheet_width = spritesheet
+        spritesheet_height = spritesheet
     
     files = []
     
@@ -48,6 +58,5 @@ def sprite(glyph):
         cut_frame = current_frame.crop((0,0,tile_width,tile_height))
     
         spritesheet.paste(cut_frame, box)
-    if not os.path.exists("staging/target/rp/font"):
-        os.makedirs("staging/target/rp/font")
-    spritesheet.save(f"staging/target/rp/font/glyph_{glyph}.png", "PNG")
+    
+    spritesheet.save(f"font/glyph_{glyph}.png", "PNG")

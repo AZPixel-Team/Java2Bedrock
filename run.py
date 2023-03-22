@@ -2,39 +2,52 @@ from PIL import Image
 from sprite import sprite
 from io import BytesIO
 from zipfile import ZipFile
-import glob, os, math, time, shutil, json, re, itertools, time, requests
+import glob, os, math, shutil, json, requests, sys
 
-blankimg = 'blank256.png'
 lines = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, "a", "b", "c", "d", "e", "f"]
 
 def downloadpack(url):
     req = requests.get(url)
     zipfile = ZipFile(BytesIO(req.content))
     zipfile.extractall('pack/')
-    print("Download Done")
 
-downloadpack(os.environ.get("PACK_URL"))
+downloadpack("https://cdn.discordapp.com/attachments/1086641001604579468/1086642049832472636/Overseer_Tools_Pack_Resourcepack.zip")
+try:
+    with open("pack/assets/minecraft/font/default.json", "r") as f:
+        data = json.load(f)
+        symbols = [d['chars'] for d in data['providers']]
+        paths = [d['file'] for d in data['providers']]
+except:
+    sys.exit("No Have Font")
 
-def create_empty(glyph):
+def createfoler():
     if not os.path.exists(f"images/{glyph}"):
         os.makedirs(f"images/{glyph}")
+    if not os.path.exists(f"export/{glyph}"):
+        os.makedirs(f"export/{glyph}")
+    
+def create_empty(glyph, blankimg):
     for line in lines:
         for linee in lines:
             if linee != lines:
                 name = f"{line}{linee}"
-                imagesus = Image.open(blankimg)
-                image = imagesus.copy()
-                image.save(f"images/{glyph}/0x{glyph}{name}.png", "PNG")
+                if os.path.isfile(f"images/{glyph}/0x{glyph}{name}.png"):
+                    continue
+                else:
+                    imagesus = Image.open(blankimg)
+                    image = imagesus.copy()
+                    image.save(f"images/{glyph}/0x{glyph}{name}.png", "PNG")
     for line in lines:
         name = f"{line}{line}"
-        imagesus = Image.open(blankimg)
-        image = imagesus.copy()
-        image.save(f"images/{glyph}/0x{glyph}{name}.png", "PNG")
+        if os.path.isfile(f"images/{glyph}/0x{glyph}{name}.png"):
+            continue
+        else:
+            imagesus = Image.open(blankimg)
+            image = imagesus.copy()
+            image.save(f"images/{glyph}/0x{glyph}{name}.png", "PNG")
 
-def imagetoexport(glyph):
+def imagetoexport(glyph, blankimg):
     filelist = [file for file in os.listdir(f'images/{glyph}') if file.endswith('.png')]
-    if not os.path.exists(f"export/{glyph}"):
-        os.makedirs(f"export/{glyph}")
     for img in filelist:
         image = Image.open(blankimg)
         logo = Image.open(f'images/{glyph}/{img}')
@@ -42,15 +55,7 @@ def imagetoexport(glyph):
         position = (0, 0)
         image_copy.paste(logo, position)
         image_copy.save(f"export/{glyph}/{img}")
-        
-try:
-    with open("pack/assets/minecraft/font/default.json", "r") as f:
-        data = json.load(f)
-        symbols = [d['chars'] for d in data['providers']]
-        paths = [d['file'] for d in data['providers']]
-except:
-    exit()
-    
+            
 glyphs = []
 for i in symbols:
     if i not in glyphs:
@@ -64,7 +69,7 @@ print(glyphs)
 
 def converterpack(glyph):
     if len(symbols) == len(paths):
-        create_empty(glyph) 
+        maxsw, maxsh = 0, 0
         for symboll, path in zip(symbols, paths):
             symbolbe = ''.join(symboll)
             symbolbehex = (hex(ord(symbolbe)))
@@ -78,23 +83,41 @@ def converterpack(glyph):
                         pathnew = path.split(":")[1]
                         imagefont = Image.open(f"pack/assets/{namespace}/textures/{pathnew}")
                         image = imagefont.copy()
-                        os.remove(f"images/{glyph}/0x{glyph}{symbol}.png")
+                        #os.remove(f"images/{glyph}/0x{glyph}{symbol}.png")
                         image.save(f"images/{glyph}/0x{glyph}{symbol}.png", "PNG")
-                    except:
+                        sw, sh = imagefont.size
+                        maxsw, maxsh = max(maxsw, sw), max(maxsh, sh)
+                    except Exception as e:
+                        print(e)
                         pass
                 else:
                     try:
                         imagefont = Image.open(f"pack/assets/minecraft/textures/{path}")
                         image = imagefont.copy()
-                        os.remove(f"images/{glyph}/0x{glyph}{symbol}.png")
+                        #os.remove(f"images/{glyph}/0x{glyph}{symbol}.png")
                         image.save(f"images/{glyph}/0x{glyph}{symbol}.png", "PNG")
-                    except:
+                        sw, sh = imagefont.size
+                        maxsw, maxsh = max(maxsw, sw), max(maxsh, sh)
+                    except Exception as e: 
+                        print(e)
                         pass
             else:
                 continue
         else:
-            imagetoexport(glyph)
-            sprite(glyph)
+            if maxsw == maxsh:
+                size = maxsw, maxsh
+            elif maxsw > maxsh:
+                size = maxsw, maxsw
+            elif maxsh > maxsw:
+                size = maxsh, maxsh
+            glyphsize = size * 16
+            img = Image.open("blank256.png")
+            imgre = img.resize(size)
+            imgre.save("blankimg.png")
+            blankimg = "blankimg.png"
+            create_empty(glyph, blankimg) 
+            imagetoexport(glyph, blankimg)
+            sprite(glyph, glyphsize, size)
             
 for glyph in glyphs:
     converterpack(glyph)
