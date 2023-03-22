@@ -88,6 +88,7 @@ def converterpack(glyph):
                         sw, sh = imagefont.size
                         maxsw, maxsh = max(maxsw, sw), max(maxsh, sh)
                     except Exception as e:
+                        maxsw, maxsh = maxsw, maxsh
                         print(e)
                         pass
                 else:
@@ -99,6 +100,7 @@ def converterpack(glyph):
                         sw, sh = imagefont.size
                         maxsw, maxsh = max(maxsw, sw), max(maxsh, sh)
                     except Exception as e: 
+                        maxsw, maxsh = maxsw, maxsh
                         print(e)
                         pass
             else:
