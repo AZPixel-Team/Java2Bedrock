@@ -18,7 +18,7 @@ try:
         symbols = [d['chars'] for d in data['providers']]
         paths = [d['file'] for d in data['providers']]
 except:
-    sys.exit("No Have Font")
+    exit()
 
 def createfoler():
     if not os.path.exists(f"images/{glyph}"):
