@@ -10,8 +10,7 @@ def downloadpack(url):
     req = requests.get(url)
     zipfile = ZipFile(BytesIO(req.content))
     zipfile.extractall('pack/')
-downloadpack("https://cdn.discordapp.com/attachments/1023221759031386122/1089036515667083274/generated_6.zip")
-
+downloadpack(os.environ.get("PACK_URL"))
 try:
     with open("pack/assets/minecraft/font/default.json", "r") as f:
         data = json.load(f)
