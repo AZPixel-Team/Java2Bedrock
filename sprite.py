@@ -59,4 +59,4 @@ def sprite(glyph, spritesheet = None, tile = None):
     
         spritesheet.paste(cut_frame, box)
     os.makedirs("target/rp/font", exist_ok = True)
-    spritesheet.save(f"target/rp/font/glyph_{glyph}.png", "PNG")
+    spritesheet.save(f"staging/target/rp/font/glyph_{glyph}.png", "PNG")
