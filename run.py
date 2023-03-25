@@ -25,6 +25,7 @@ def createfolder(glyph):
     os.mkdir("images/{glyph}", exist_ok = True)
     os.mkdir("export/{glyph}", exist_ok = True)
 
+
 def create_empty(glyph, blankimg):
     for line in lines:
         for linee in lines:
@@ -71,8 +72,7 @@ print(glyphs)
 listglyphdone = []
     
 def converterpack(glyph):
-    if os.path.isdir(f"images/{glyph}") == False:
-        os.mkdir(f"images/{glyph}")
+    createfolder(glyph)
     if len(symbols) == len(paths):
         maxsw, maxsh = 0, 0
         for symboll, path in zip(symbols, paths):
