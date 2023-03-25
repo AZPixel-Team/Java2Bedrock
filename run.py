@@ -11,13 +11,15 @@ def downloadpack(url):
     zipfile = ZipFile(BytesIO(req.content))
     zipfile.extractall('pack/')
 
+download(os.environ.get("PACK_URL"))
+
 try:
     with open("pack/assets/minecraft/font/default.json", "r") as f:
         data = json.load(f)
         symbols = [d['chars'] for d in data['providers']]
         paths = [d['file'] for d in data['providers']]
 except:
-    sys.exit("No Have Font")
+    exit()
 
 def createfoler(glyph):
     if not os.path.exists(f"images/{glyph}"):
