@@ -21,7 +21,7 @@ try:
 except:
     exit()
 
-def createfoler(glyph):
+def createfolder(glyph):
     os.mkdir("images/{glyph}", exist_ok = True)
     os.mkdir("export/{glyph}", exist_ok = True)
 
