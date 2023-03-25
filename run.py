@@ -22,8 +22,8 @@ except:
     exit()
 
 def createfolder(glyph):
-    os.mkdir("images/{glyph}", exist_ok = True)
-    os.mkdir("export/{glyph}", exist_ok = True)
+    os.makedirs("images/{glyph}", exist_ok = True)
+    os.makedirs("export/{glyph}", exist_ok = True)
 
 
 def create_empty(glyph, blankimg):
