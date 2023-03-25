@@ -11,7 +11,7 @@ def downloadpack(url):
     zipfile = ZipFile(BytesIO(req.content))
     zipfile.extractall('pack/')
 
-download(os.environ.get("PACK_URL"))
+downloadpack(os.environ.get("PACK_URL"))
 
 try:
     with open("pack/assets/minecraft/font/default.json", "r") as f:
