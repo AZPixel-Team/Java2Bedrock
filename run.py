@@ -22,11 +22,9 @@ except:
     exit()
 
 def createfoler(glyph):
-    if not os.path.exists(f"images/{glyph}"):
-        os.mkdir(f"images/{glyph}")
-    if not os.path.exists(f"export/{glyph}"):
-        os.mkdir(f"export/{glyph}")
-    
+    os.mkdir("images/{glyph}", exist_ok = True)
+    os.mkdir("export/{glyph}", exist_ok = True)
+
 def create_empty(glyph, blankimg):
     for line in lines:
         for linee in lines:
