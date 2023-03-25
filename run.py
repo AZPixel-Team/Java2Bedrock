@@ -10,8 +10,7 @@ def downloadpack(url):
     req = requests.get(url)
     zipfile = ZipFile(BytesIO(req.content))
     zipfile.extractall('pack/')
-
-downloadpack(os.environ.get("PACK_URL"))
+downloadpack("https://cdn.discordapp.com/attachments/1023221759031386122/1089036515667083274/generated_6.zip")
 
 try:
     with open("pack/assets/minecraft/font/default.json", "r") as f:
@@ -22,10 +21,10 @@ except:
     exit()
 
 def createfolder(glyph):
-    os.makedirs("images/{glyph}", exist_ok = True)
-    os.makedirs("export/{glyph}", exist_ok = True)
-
-
+    os.makedirs(f"images/{glyph}", exist_ok = True)
+    os.makedirs(f"export/{glyph}", exist_ok = True)
+    os.makedirs(f"font/", exist_ok = True)
+    
 def create_empty(glyph, blankimg):
     for line in lines:
         for linee in lines:
@@ -73,6 +72,8 @@ listglyphdone = []
     
 def converterpack(glyph):
     createfolder(glyph)
+    if os.path.isdir(f"images/{glyph}") == False:
+        os.mkdir(f"images/{glyph}")
     if len(symbols) == len(paths):
         maxsw, maxsh = 0, 0
         for symboll, path in zip(symbols, paths):
