@@ -1156,7 +1156,7 @@ then
 else
   cd ./scratch_files > /dev/null && zip -rq8 scratch_files.zip . -x "*/.*" && cd .. > /dev/null && mv ./scratch_files/scratch_files.zip ./target/scratch_files.zip
   status_message completion "Archived scratch files\n"
-
+fi
 
 status_message process "Compressing output packs"
 mkdir ./target/packaged
