@@ -91,7 +91,6 @@ def converterpack(glyph):
                 symbolcheck = symbolac[:2]
                 glyphs.append(symbolcheck.upper())
             if (symbolcheck.upper()) == (glyph.upper()):
-                print(symbolbehex)
                 if ":" in path:
                     try:
                         namespace = path.split(":")[0]
