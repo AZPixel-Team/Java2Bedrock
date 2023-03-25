@@ -58,5 +58,5 @@ def sprite(glyph, spritesheet = None, tile = None):
         cut_frame = current_frame.crop((0,0,tile_width,tile_height))
     
         spritesheet.paste(cut_frame, box)
-    
-    spritesheet.save(f"font/glyph_{glyph}.png", "PNG")
+    os.makedirs("target/rp/font", exist_ok = True)
+    spritesheet.save(f"target/rp/font/glyph_{glyph}.png", "PNG")
