@@ -1156,9 +1156,7 @@ then
 else
   cd ./scratch_files > /dev/null && zip -rq8 scratch_files.zip . -x "*/.*" && cd .. > /dev/null && mv ./scratch_files/scratch_files.zip ./target/scratch_files.zip
   status_message completion "Archived scratch files\n"
-fi
 
-mogrify -channel A -fx 'a > (1/255) ? rgb(150,150,150) : u' -define png:preserve-colormap=true target/rp/textures/geyser/geyser_custom/*.png
 
 status_message process "Compressing output packs"
 mkdir ./target/packaged
