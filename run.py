@@ -2,7 +2,6 @@ from PIL import Image
 from sprite import sprite
 from io import BytesIO
 from zipfile import ZipFile
-import numpy as np
 import glob, os, json, requests
 
 lines = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, "a", "b", "c", "d", "e", "f"]
