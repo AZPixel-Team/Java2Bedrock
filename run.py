@@ -2,7 +2,8 @@ from PIL import Image
 from sprite import sprite
 from io import BytesIO
 from zipfile import ZipFile
-import glob, os, math, shutil, json, requests, sys
+import numpy as np
+import glob, os, json, requests
 
 lines = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, "a", "b", "c", "d", "e", "f"]
 
@@ -10,12 +11,14 @@ def downloadpack(url):
     req = requests.get(url)
     zipfile = ZipFile(BytesIO(req.content))
     zipfile.extractall('pack/')
-downloadpack(os.environ.get("PACK_URL"))
+downloadpack("https://www.dropbox.com/s/9oaaz839l2r6gsu/Realistic%20Survival%20RP%201.2.5%20DEV-1.zip?dl=1")
 try:
     with open("pack/assets/minecraft/font/default.json", "r") as f:
         data = json.load(f)
         symbols = [d['chars'] for d in data['providers']]
         paths = [d['file'] for d in data['providers']]
+        heights = [d['height'] for d in data['providers']]
+        ascents = [d['ascent'] for d in data['providers']]
 except:
     exit()
 
@@ -45,16 +48,36 @@ def create_empty(glyph, blankimg):
             image.save(f"images/{glyph}/0x{glyph}{name}.png", "PNG")
 
 def imagetoexport(glyph, blankimg):
-    if os.path.isdir(f"export/{glyph}") == False:
-        os.mkdir(f"export/{glyph}")
     filelist = [file for file in os.listdir(f'images/{glyph}') if file.endswith('.png')]
     for img in filelist:
         image = Image.open(blankimg)
         logo = Image.open(f'images/{glyph}/{img}')
         image_copy = image.copy()
-        position = (0, 0)
-        image_copy.paste(logo, position)
-        image_copy.save(f"export/{glyph}/{img}")
+        w, h = image.size
+        wl, hl = logo.size
+        for height, symboll in zip(heights, symbols):
+            symbolbe = ''.join(symboll)
+            symbolbehex = (hex(ord(symbolbe)))
+            if len(symbolbehex) == 6:
+                symbol = symbolbehex[4:]
+            elif len(symbolbehex) == 5:
+                symbolbehex = symbolbehex[:2] + "0" + symbolbehex[2:]
+                symbol = symbolbehex[4:]
+            name = f"0x{glyph}{symbol}"
+            imgname = f"0x{glyph}{img}"
+            if name == imgname:
+                if height >= 1 and height < w and height < h:
+                    size = (height, height)
+                    logo.thumbnail(size,Image.ANTIALIAS)                 
+        if wl > (w/2) and hl > (h/2):
+            position = (0, 0)
+            image_copy.paste(logo, position)
+            image_copy.save(f"export/{glyph}/{img}")
+        else:
+            position = (0, h//2)
+            image_copy.paste(logo, position)
+            image_copy.save(f"export/{glyph}/{img}")
+
             
 glyphs = []
 for i in symbols:
@@ -71,8 +94,6 @@ listglyphdone = []
     
 def converterpack(glyph):
     createfolder(glyph)
-    if os.path.isdir(f"images/{glyph}") == False:
-        os.mkdir(f"images/{glyph}")
     if len(symbols) == len(paths):
         maxsw, maxsh = 0, 0
         for symboll, path in zip(symbols, paths):
@@ -116,13 +137,13 @@ def converterpack(glyph):
             for file in files:
                 image = Image.open(file)
                 sw, sh = image.size
-                maxsw, maxsh = max(maxsw, sw), max(maxsh, sh)
+                maxsw, maxsh = (max(maxsw, sw), max(maxsh, sh))
             if maxsw == maxsh:
-                size = maxsw, maxsw
+                size = (int(maxsw + 1), int(maxsw + 1))
             elif maxsw > maxsh:
-                size = maxsw, maxsw
+                size = (int(maxsw + 1), int(maxsw + 1))
             elif maxsh > maxsw:
-                size = maxsh, maxsh
+                size = (int(maxsh + 1), int(maxsh + 1))
             if size == (0, 0):
                 pass
             else:
