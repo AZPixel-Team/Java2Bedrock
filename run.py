@@ -11,7 +11,7 @@ def downloadpack(url):
     req = requests.get(url)
     zipfile = ZipFile(BytesIO(req.content))
     zipfile.extractall('pack/')
-downloadpack("https://www.dropbox.com/s/9oaaz839l2r6gsu/Realistic%20Survival%20RP%201.2.5%20DEV-1.zip?dl=1")
+downloadpack(os.environ.get("PACK_URL"))
 try:
     with open("pack/assets/minecraft/font/default.json", "r") as f:
         data = json.load(f)
