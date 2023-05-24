@@ -73,7 +73,7 @@ def imagetoexport(glyph, blankimg):
             image_copy.paste(logo, position)
             image_copy.save(f"export/{glyph}/{img}")
         else:
-            position = (0, h//2)
+            position = (0, (h//2) - (hl//2))
             image_copy.paste(logo, position)
             image_copy.save(f"export/{glyph}/{img}")
 
