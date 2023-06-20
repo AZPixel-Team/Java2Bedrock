@@ -18,7 +18,8 @@ try:
         paths = [d['file'] for d in data['providers']]
         heights = [d['height'] for d in data['providers']]
         ascents = [d['ascent'] for d in data['providers']]
-except:
+except Exception as e:
+    print(e)
     exit()
 
 def createfolder(glyph):
