@@ -45,6 +45,9 @@ body:
         - 1.18.2
         - 1.19.2
         - 1.19.3
+        - 1.19.4
+        - '1.20'
+        - 1.20.1
     validations:
       required: false
 
@@ -91,6 +94,15 @@ body:
       label: Archive Scratch Files
       description: |
         Should scratch files be archived? This will create a zip file containing the scratch files used by the script during the conversion process. If not selected, this will default to `false`.
+      options:
+        - 'true'
+        - 'false'
+  - type: dropdown
+    id: rename-model-files
+    attributes:
+      label: Rename Model Files
+      description: |
+        Should scratch files be renamed to reduce path length? If not selected, this will default to `false`.
       options:
         - 'true'
         - 'false'
