@@ -1,5 +1,5 @@
 from PIL import Image
-from sprite import sprite
+from font_sprite import sprite
 from io import BytesIO
 from zipfile import ZipFile
 import glob, os, json, requests
