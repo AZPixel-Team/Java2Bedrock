@@ -67,6 +67,10 @@ while i < 4:
 				os.mkdir("staging/target/rp/textures/armor_layer")
 			if not os.path.exists(f"staging/target/rp/textures/armor_layer/{layer}.png"):
 				shutil.copy(f"pack/assets/minecraft/optifine/cit/ia_generated_armors/{layer}.png", "staging/target/rp/textures/armor_layer")
+			with open(f"pack/assets/{namespace}/models/{path}.json", "r") as f :
+				texture = json.load(f)["textures"]["layer1"]
+				tpath = texture.split(":")[1]
+				shutil.copy(f"pack/assets/{namespace}/textures/{tpath}.png", f"staging/target/rp/textures/{namespace}/{path}.png")
 			afile = glob.glob(f"staging/target/rp/attachables/{namespace}/{path}*.json")
 			with open(afile[0], "r") as f:
 				da = json.load(f)["minecraft:attachable"]
