@@ -107,6 +107,15 @@ body:
         - 'true'
         - 'false'
   - type: dropdown
+    id: font-conversion
+    attributes:
+      label: Font Conversion
+      description: |
+        Enable font conversion (Can Error) default `false`.
+      options:
+        - 'true'
+        - 'false'
+  - type: dropdown
     id: armor-conversion
     attributes:
       label: Armor Conversion
