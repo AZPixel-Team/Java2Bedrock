@@ -106,6 +106,15 @@ body:
       options:
         - 'true'
         - 'false'
+  - type: dropdown
+    id: armor-conversion
+    attributes:
+      label: Armor Conversion
+      description: |
+        Enable armor conversion (Only Itemsadder) default `false`.
+      options:
+        - 'true'
+        - 'false'
   - type: checkboxes
     id: terms
     attributes:
