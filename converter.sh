@@ -1193,6 +1193,10 @@ else
   status_message completion "Archived scratch files\n"
 fi
 
+cd -
+python font.py
+python armor.py
+
 status_message process "Compressing output packs"
 mkdir ./target/packaged
 cd ./target/rp > /dev/null && zip -rq8 geyser_resources_preview.mcpack . -x "*/.*" && cd ../.. > /dev/null && mv ./target/rp/geyser_resources_preview.mcpack ./target/packaged/geyser_resources_preview.mcpack
