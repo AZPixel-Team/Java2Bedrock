@@ -70,7 +70,10 @@ while i < 4:
 			with open(f"pack/assets/{namespace}/models/{path}.json", "r") as f :
 				texture = json.load(f)["textures"]["layer1"]
 				tpath = texture.split(":")[1]
-				shutil.copy(f"pack/assets/{namespace}/textures/{tpath}.png", f"staging/target/rp/textures/{namespace}/{path}.png")
+				try:
+					shutil.copy(f"pack/assets/{namespace}/textures/{tpath}.png", f"staging/target/rp/textures/{namespace}/{path}.png")
+				except Exception as e:
+					print(e)
 			afile = glob.glob(f"staging/target/rp/attachables/{namespace}/{path}*.json")
 			with open(afile[0], "r") as f:
 				da = json.load(f)["minecraft:attachable"]
