@@ -55,29 +55,34 @@ while i < 4:
 		if item in item_type:
 			continue
 		else:
-			path = model.split(":")[1]
-			optifine_file = f"{namespace}_{item}"
-			with open(f"pack/assets/minecraft/optifine/cit/ia_generated_armors/{optifine_file}.properties", "rb") as f:
-				optifine.load(f)
-				if i == 2:
-					layer = optifine.get("texture.leather_layer_2").data.split(".")[0]
-				else:
-					layer = optifine.get("texture.leather_layer_1").data.split(".")[0]
-			if not os.path.exists("staging/target/rp/textures/armor_layer"):
-				os.mkdir("staging/target/rp/textures/armor_layer")
-			if not os.path.exists(f"staging/target/rp/textures/armor_layer/{layer}.png"):
-				shutil.copy(f"pack/assets/minecraft/optifine/cit/ia_generated_armors/{layer}.png", "staging/target/rp/textures/armor_layer")
-			with open(f"pack/assets/{namespace}/models/{path}.json", "r") as f :
-				texture = json.load(f)["textures"]["layer1"]
-				tpath = texture.split(":")[1]
-				try:
-					shutil.copy(f"pack/assets/{namespace}/textures/{tpath}.png", f"staging/target/rp/textures/{namespace}/{path}.png")
-				except Exception as e:
-					print(e)
-			afile = glob.glob(f"staging/target/rp/attachables/{namespace}/{path}*.json")
-			with open(afile[0], "r") as f:
-				da = json.load(f)["minecraft:attachable"]
-				gmdl = da["description"]["identifier"].split(":")[1]
-			pfile = afile[0].replace(".json", ".player.json")
-			write_armor(pfile, gmdl, layer, i)
+			try:
+				path = model.split(":")[1]
+				optifine_file = f"{namespace}_{item}"
+				with open(f"pack/assets/minecraft/optifine/cit/ia_generated_armors/{optifine_file}.properties", "rb") as f:
+					optifine.load(f)
+					if i == 2:
+						layer = optifine.get("texture.leather_layer_2").data.split(".")[0]
+					else:
+						layer = optifine.get("texture.leather_layer_1").data.split(".")[0]
+				if not os.path.exists("staging/target/rp/textures/armor_layer"):
+					os.mkdir("staging/target/rp/textures/armor_layer")
+				if not os.path.exists(f"staging/target/rp/textures/armor_layer/{layer}.png"):
+					shutil.copy(f"pack/assets/minecraft/optifine/cit/ia_generated_armors/{layer}.png", "staging/target/rp/textures/armor_layer")
+				with open(f"pack/assets/{namespace}/models/{path}.json", "r") as f :
+					texture = json.load(f)["textures"]["layer1"]
+					tpath = texture.split(":")[1]
+					try:
+						shutil.copy(f"pack/assets/{namespace}/textures/{tpath}.png", f"staging/target/rp/textures/{namespace}/{path}.png")
+					except Exception as e:
+						print(e)
+				afile = glob.glob(f"staging/target/rp/attachables/{namespace}/{path}*.json")
+				with open(afile[0], "r") as f:
+					da = json.load(f)["minecraft:attachable"]
+					gmdl = da["description"]["identifier"].split(":")[1]
+				pfile = afile[0].replace(".json", ".player.json")
+				write_armor(pfile, gmdl, layer, i)
+			except Exception as e:
+				print(e)
+				print("Item not found of ...")
+				continue
 	i += 1
