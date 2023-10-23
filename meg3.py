@@ -6,7 +6,8 @@ if os.getenv("ATTACHABLE_MATERIAL") == "entity_emissive_alpha_one_sided" and os.
     files = glob.glob("staging/target/rp/attachables/modelengine/**/*.json")
     for file in files:
         with open(file, "r") as f:
-            texture = f"staging/target/rp/{json.load(f)["minecraft:attachable"]["description"]["textures"]["default"]}"
+            texture_file = json.load(f)["minecraft:attachable"]["description"]["textures"]["default"]
+            texture = f"staging/target/rp/{texture_file}"
         im = Image.open(texture)
         im = im.convert('RGBA')
         sx, sy = im.size
