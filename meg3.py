@@ -2,7 +2,7 @@ from PIL import Image
 import json
 import glob
 import os
-if os.getenv("ATTACHABLE_MATERIAL") == "entity_emissive_alpha_one_sided" and os.getenv("MEG3_FIX") == True:
+if os.getenv("ATTACHABLE_MATERIAL") == "entity_emissive_alpha_one_sided" and os.getenv("MEG3_FIX") == "true":
     files = glob.glob("staging/target/rp/attachables/modelengine/**/*.json")
     for file in files:
         with open(file, "r") as f:

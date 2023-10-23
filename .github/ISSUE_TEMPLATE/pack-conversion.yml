@@ -124,6 +124,15 @@ body:
       options:
         - 'true'
         - 'false'
+  - type: dropdown
+    id: meg3-fix
+    attributes:
+      label: Meg3 Fix
+      description: |
+        Fix Black Model for MEG3.
+      options:
+        - 'true'
+        - 'false'
   - type: checkboxes
     id: terms
     attributes:

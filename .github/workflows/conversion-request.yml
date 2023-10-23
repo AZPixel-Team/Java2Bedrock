@@ -20,6 +20,9 @@ jobs:
       attachable_material: ${{ steps.organize-inputs.outputs.ATTACHABLE_MATERIAL }}
       archive_scratch: ${{ steps.organize-inputs.outputs.ARCHIVE_SCRATCH }}
       rename_model_files: ${{ steps.organize-inputs.outputs.RENAME_MODEL_FILES }}
+      font_conversion: ${{ steps.organize-inputs.outputs.FONT_CONVERSION}}
+      armor_conversion: ${{ steps.organize-inputs.outputs.ARMOR_CONVERSION}}
+      meg3_fix: ${{ steps.organize-inputs.outputs.MEG3_FIX}}
     steps:
       - name: Issue Forms Body Parser
         id: parse-issue
@@ -38,7 +41,10 @@ jobs:
             "block_material": test_input(.["block-material"].text; "alpha_test"),
             "attachable_material": test_input(.["attachable-material"].text; "entity_alphatest_one_sided"),
             "archive_scratch": test_input(.["archive-scratch-files"].text; "false"),
-            "rename_model_files": test_input(.["rename-model-files"].text; "false")
+            "rename_model_files": test_input(.["rename-model-files"].text; "false"),
+            "font_conversion": test_input(.["font-conversion"].text; "true"),
+            "armor_conversion": test_input(.["armor-conversion"].text; "true"),
+            "meg3_fix": test_input(.["meg3-fix"].text; "true")
           }' > inputs.json
           echo "PACK_URL=$(jq -r '.pack_url' inputs.json)" >> $GITHUB_OUTPUT
           echo "DEFAULT_PACK_URL=$(jq -r '.default_pack_url' inputs.json)" >> $GITHUB_OUTPUT
@@ -48,6 +54,10 @@ jobs:
           echo "ATTACHABLE_MATERIAL=$(jq -r '.attachable_material' inputs.json)" >> $GITHUB_OUTPUT
           echo "ARCHIVE_SCRATCH=$(jq -r '.archive_scratch' inputs.json)" >> $GITHUB_OUTPUT
           echo "RENAME_MODEL_FILES=$(jq -r '.rename_model_files' inputs.json)" >> $GITHUB_OUTPUT
+          echo "FONT_CONVERSION=$(jq -r '.font_conversion' inputs.json)" >> $GITHUB_OUTPUT
+          echo "ARMOR_CONVERSION=$(jq -r '.armor_conversion' inputs.json)" >> $GITHUB_OUTPUT
+          echo "MEG3_FIX=$(jq -r '.meg3_fix' inputs.json)" >> $GITHUB_OUTPUT
+          
   convert-pack:
     runs-on: ubuntu-latest
     needs: get-pack-info
@@ -93,6 +103,9 @@ jobs:
           ATTACHABLE_MATERIAL: ${{ needs.get-pack-info.outputs.attachable_material }}
           ARCHIVE_SCRATCH: ${{ needs.get-pack-info.outputs.archive_scratch }}
           RENAME_MODEL_FILES: ${{ needs.get-pack-info.outputs.rename_model_files }}
+          FONT_CONVERSION: ${{ needs.get-pack-info.outputs.font_conversion }}
+          ARMOR_CONVERSION: ${{ needs.get-pack-info.outputs.armor_conversion }}
+          MEG3_FIX: ${{ needs.get-pack-info.outputs.meg3_fix }}
         run: |
           mkdir -p staging
           cp converter.sh staging/
