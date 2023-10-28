@@ -4,7 +4,7 @@ import shutil
 import glob
 from jproperties import Properties
 
-if os.getenv("ARMOR_CONVERDION") == "true":
+if os.getenv("ARMOR_CONVERSION") == "true":
 	optifine = Properties()
 	i = 0
 	item_type = ["leather_helmet", "leather_chestplate", "leather_leggings", "leather_boots"]
