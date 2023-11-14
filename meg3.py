@@ -17,7 +17,7 @@ if os.getenv("ATTACHABLE_MATERIAL") == "entity_emissive_alpha_one_sided" and os.
             for x in range(sx):
                 for y in range(sy):
                     if imd[x,y] == (0, 0, 0, 51):
-                        imd[x,y] = 0,0,0,0
+                        imd[x,y] = (0,0,0,0)
             im.save(texture)
         except Exception as e:
             print(e)
