@@ -8,7 +8,7 @@ if os.getenv("ATTACHABLE_MATERIAL") == "entity_emissive_alpha_one_sided" and os.
         try:
             with open(file, "r") as f:
                 texture_file = json.load(f)["minecraft:attachable"]["description"]["textures"]["default"]
-                texture = f"staging/target/rp/{texture_file}"
+                texture = f"staging/target/rp/{texture_file}.png"
             im = Image.open(texture)
             im = im.convert('RGBA')
             sx, sy = im.size
