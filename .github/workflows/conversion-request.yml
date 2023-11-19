@@ -23,6 +23,7 @@ jobs:
       font_conversion: ${{ steps.organize-inputs.outputs.FONT_CONVERSION}}
       armor_conversion: ${{ steps.organize-inputs.outputs.ARMOR_CONVERSION}}
       meg3_fix: ${{ steps.organize-inputs.outputs.MEG3_FIX}}
+      sounds_conversion: ${{ steps.organize-inputs.outputs.SOUNDS_CONVERSION }}
     steps:
       - name: Issue Forms Body Parser
         id: parse-issue
@@ -44,7 +45,8 @@ jobs:
             "rename_model_files": test_input(.["rename-model-files"].text; "false"),
             "font_conversion": test_input(.["font-conversion"].text; "true"),
             "armor_conversion": test_input(.["armor-conversion"].text; "true"),
-            "meg3_fix": test_input(.["meg3-fix"].text; "true")
+            "meg3_fix": test_input(.["meg3-fix"].text; "true"),
+            "sounds_conversion": test_input(.["sounds-conversion"].text; "true")
           }' > inputs.json
           echo "PACK_URL=$(jq -r '.pack_url' inputs.json)" >> $GITHUB_OUTPUT
           echo "DEFAULT_PACK_URL=$(jq -r '.default_pack_url' inputs.json)" >> $GITHUB_OUTPUT
@@ -57,6 +59,7 @@ jobs:
           echo "FONT_CONVERSION=$(jq -r '.font_conversion' inputs.json)" >> $GITHUB_OUTPUT
           echo "ARMOR_CONVERSION=$(jq -r '.armor_conversion' inputs.json)" >> $GITHUB_OUTPUT
           echo "MEG3_FIX=$(jq -r '.meg3_fix' inputs.json)" >> $GITHUB_OUTPUT
+          echo "SOUNDS_CONVERSION=$(jq -r '.sounds_conversion' inputs.json)" >> $GITHUB_OUTPUT
           
   convert-pack:
     runs-on: ubuntu-latest
@@ -106,6 +109,7 @@ jobs:
           FONT_CONVERSION: ${{ needs.get-pack-info.outputs.font_conversion }}
           ARMOR_CONVERSION: ${{ needs.get-pack-info.outputs.armor_conversion }}
           MEG3_FIX: ${{ needs.get-pack-info.outputs.meg3_fix }}
+          SOUNDS_CONVERSION: ${{ needs.get-pack-info.outputs.sounds_conversion }}
         run: |
           mkdir -p staging
           cp converter.sh staging/

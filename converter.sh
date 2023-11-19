@@ -1197,6 +1197,7 @@ cd -
 python font.py
 python armor.py
 python meg3.py
+python sounds.py
 cd ./staging
 
 status_message process "Compressing output packs"
