@@ -133,6 +133,15 @@ body:
       options:
         - 'true'
         - 'false'
+  - type: dropdown
+    id: sounds-conversion
+    attributes:
+      label: "Sounds Convesion"
+      description: |
+        Conversion Sounds
+      options:
+        - 'true'
+        - 'false'
   - type: checkboxes
     id: terms
     attributes:

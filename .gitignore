@@ -21,3 +21,4 @@ atlases.json
 icons.json
 generated.json
 scratch_files/
+.vscode/settings.json
