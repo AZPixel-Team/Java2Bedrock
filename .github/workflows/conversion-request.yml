@@ -43,10 +43,10 @@ jobs:
             "attachable_material": test_input(.["attachable-material"].text; "entity_alphatest_one_sided"),
             "archive_scratch": test_input(.["archive-scratch-files"].text; "false"),
             "rename_model_files": test_input(.["rename-model-files"].text; "false"),
-            "font_conversion": test_input(.["font-conversion"].text; "true"),
-            "armor_conversion": test_input(.["armor-conversion"].text; "true"),
-            "meg3_fix": test_input(.["meg3-fix"].text; "true"),
-            "sounds_conversion": test_input(.["sounds-conversion"].text; "true")
+            "font_conversion": test_input(.["font-conversion"].text; "false"),
+            "armor_conversion": test_input(.["armor-conversion"].text; "false"),
+            "meg3_fix": test_input(.["meg3-fix"].text; "false"),
+            "sounds_conversion": test_input(.["sounds-conversion"].text; "false")
           }' > inputs.json
           echo "PACK_URL=$(jq -r '.pack_url' inputs.json)" >> $GITHUB_OUTPUT
           echo "DEFAULT_PACK_URL=$(jq -r '.default_pack_url' inputs.json)" >> $GITHUB_OUTPUT
