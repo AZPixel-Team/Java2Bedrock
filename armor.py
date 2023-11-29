@@ -46,7 +46,7 @@ if os.getenv("ARMOR_CONVERSION") == "true":
 			f.write(json.dumps(ajson))
 
 	while i < 4:
-		with open(f"pack/assets/minecraft/models/item/{item_type[i]}.json", "r") as f:
+		with open(f"assets/minecraft/models/item/{item_type[i]}.json", "r") as f:
 			data = json.load(f)
 		for override in data["overrides"]:
 			custom_model_data = override["predicate"]["custom_model_data"]
@@ -59,7 +59,7 @@ if os.getenv("ARMOR_CONVERSION") == "true":
 				try:
 					path = model.split(":")[1]
 					optifine_file = f"{namespace}_{item}"
-					with open(f"pack/assets/minecraft/optifine/cit/ia_generated_armors/{optifine_file}.properties", "rb") as f:
+					with open(f"assets/minecraft/optifine/cit/ia_generated_armors/{optifine_file}.properties", "rb") as f:
 						optifine.load(f)
 						if i == 2:
 							layer = optifine.get("texture.leather_layer_2").data.split(".")[0]
@@ -68,12 +68,12 @@ if os.getenv("ARMOR_CONVERSION") == "true":
 					if not os.path.exists("staging/target/rp/textures/armor_layer"):
 						os.mkdir("staging/target/rp/textures/armor_layer")
 					if not os.path.exists(f"staging/target/rp/textures/armor_layer/{layer}.png"):
-						shutil.copy(f"pack/assets/minecraft/optifine/cit/ia_generated_armors/{layer}.png", "staging/target/rp/textures/armor_layer")
-					with open(f"pack/assets/{namespace}/models/{path}.json", "r") as f :
+						shutil.copy(f"assets/minecraft/optifine/cit/ia_generated_armors/{layer}.png", "staging/target/rp/textures/armor_layer")
+					with open(f"assets/{namespace}/models/{path}.json", "r") as f :
 						texture = json.load(f)["textures"]["layer1"]
 						tpath = texture.split(":")[1]
 						try:
-							shutil.copy(f"pack/assets/{namespace}/textures/{tpath}.png", f"staging/target/rp/textures/{namespace}/{path}.png")
+							shutil.copy(f"assets/{namespace}/textures/{tpath}.png", f"staging/target/rp/textures/{namespace}/{path}.png")
 						except Exception as e:
 							print(e)
 					afile = glob.glob(f"staging/target/rp/attachables/{namespace}/{path}*.json")
