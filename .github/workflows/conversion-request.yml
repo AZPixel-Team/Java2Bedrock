@@ -125,7 +125,7 @@ jobs:
       - name: Upload converted pack
         uses: actions/upload-artifact@v3
         with:
-          name: Pack Files
+          name: PackFiles
           path: |
             staging/target/packaged/geyser_resources.mcpack
             staging/target/packaged/geyser_addon.mcaddon
