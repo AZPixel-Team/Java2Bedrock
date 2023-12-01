@@ -1194,10 +1194,7 @@ else
 fi
 
 cd -
-python font.py
-python armor.py
-python meg3.py
-python sound.py
+python manager.py
 cd ./staging
 
 status_message process "Compressing output packs"
