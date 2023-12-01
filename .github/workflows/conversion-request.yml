@@ -155,7 +155,7 @@ jobs:
             [1]: https://github.com/Hahaa13/java2bedrock/actions/runs/${{ github.run_id}}
           reactions: 'rocket'
       - name: Close Issue
-        uses: peter-evans/close-issue@v2
+        uses: peter-evans/close-issue@v3
         with:
           issue-number: ${{ github.event.issue.number }}
   conversion-failed:
@@ -184,6 +184,6 @@ jobs:
             [1]: https://github.com/Hahaa13/java2bedrock/actions/runs/${{ github.run_id}}
           reactions: 'x'
       - name: Close Issue
-        uses: peter-evans/close-issue@v2
+        uses: peter-evans/close-issue@v3
         with:
           issue-number: ${{ github.event.issue.number }}
