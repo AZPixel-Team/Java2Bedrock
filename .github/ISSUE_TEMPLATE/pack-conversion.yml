@@ -129,16 +129,16 @@ body:
     attributes:
       label: Meg3 Fix
       description: |
-        Fix Black Model for MEG3 need `entity_emissive_alpha_one_sided`
+        Fix Black Model for MEG3 need `entity_emissive_alpha_one_sided` default `false`.
       options:
         - 'true'
         - 'false'
   - type: dropdown
     id: sounds-conversion
     attributes:
-      label: "Sounds Convesion"
+      label: Sounds Conversion
       description: |
-        Conversion Sounds
+        Conversion Sounds default `false`.
       options:
         - 'true'
         - 'false'
