@@ -27,8 +27,9 @@ class Bow_Util:
                             "bow_pulling_2": f"{geometry[3]}"
                         },
                         "animations": {
-                            "wield": "animation.player.bow_custom.first_person",
-                            "third_person": "animation.player.bow_custom",
+                            "firstperson_head": "animation.geyser_custom.disable",
+                            "wield": f"animation.player.{gmdl}.first_person",
+                            "third_person": f"animation.player.{gmdl}",
                             "wield_first_person_pull": "animation.bow.wield_first_person_pull"
                         },
                         "scripts": {
