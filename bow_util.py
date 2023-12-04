@@ -2,7 +2,7 @@ import json
 import os
 
 class Bow_Util:
-    def write(file, gmdl, textures, geometry, mdefault, menchanted):
+    def write(file, gmdl, textures, geometry, mdefault, menchanted, animations):
         with open(file, "w") as f:
             data = {
                 "format_version": "1.10.0",
@@ -26,12 +26,7 @@ class Bow_Util:
                             "bow_pulling_1": f"{geometry[2]}",
                             "bow_pulling_2": f"{geometry[3]}"
                         },
-                        "animations": {
-                            "firstperson_head": "animation.geyser_custom.disable",
-                            "wield": "animation.player.bow_custom.first_person",
-                            "third_person": "animation.player.bow_custom",
-                            "wield_first_person_pull": "animation.bow.wield_first_person_pull"
-                        },
+                        "animations": animations,
                         "scripts": {
                             "pre_animation": [
                             "v.charge_amount = math.clamp((q.main_hand_item_max_duration - (q.main_hand_item_use_duration - q.frame_alpha + 1.0)) / 10.0, 0.0, 1.0f);",
@@ -101,7 +96,7 @@ class Bow_Util:
                 "format_version": "1.8.0",
                 "animations": {
                     "animation.player.bow_custom.first_person": {
-                    "loop": true,
+                    "loop": True,
                     "bones": {
                         "rightitem": {
                         "rotation": [ "c.is_first_person ? 30 : 0", "c.is_first_person ? -120 : 0", "c.is_first_person ? -60 : 0" ],
@@ -110,7 +105,7 @@ class Bow_Util:
                     }
                     },
                     "animation.player.bow_custom": {
-                    "loop": true,
+                    "loop": True,
                     "bones": {
                         "rightitem": {
                         "position": [ 0.5, -2, 0 ]

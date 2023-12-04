@@ -64,11 +64,15 @@ for file in files:
                         mdefault = dataA["minecraft:attachable"]["description"]["materials"]["default"]
                         menchanted = dataA["minecraft:attachable"]["description"]["materials"]["enchanted"]
                         gmdl = dataA["minecraft:attachable"]["description"]["identifier"].split(":")[1]
+                        animations = dataA["minecraft:attachable"]["description"]["animations"]
+                        animations["wield"] = "animation.player.bow_custom.first_person"
+                        animations["third_person"] = "animation.player.bow_custom"
+                        animations["wield_first_person_pull"] = "animation.bow.wield_first_person_pull"
                         gmdllist.append(f"geyser_custom:{gmdl}")
                     else:
                         os.remove(fa)
             Bow_Util.item_texture(gmdl, textures[0])
-            Bow_Util.write(mfile, gmdl, textures, geometry, mdefault, menchanted)
+            Bow_Util.write(mfile, gmdl, textures, geometry, mdefault, menchanted, animations)
     except Exception as e:
         print(e)
 Bow_Util.acontroller(gmdllist)
