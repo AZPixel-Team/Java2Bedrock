@@ -15,7 +15,7 @@ for file in files:
             pixels = im.load()
             for x in range(im.height):
                 for y in range(im.width):
-                    if pixels[x,y] == (255,255,255,51) or pixels[x,y] == (0,0,0,51):
+                    if pixels[x,y] == (0,0,0,51):
                         pixels[x,y] = (0,0,0,0)
             im.save(texture)
             fdone.append(file)
