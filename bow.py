@@ -37,6 +37,7 @@ if os.path.exists("pack/assets/minecraft/models/item/bow.json"):
             json.dump(data, f, indent=2)
 
 files = glob.glob("cache/*.json")
+Bow_Util.animation()
 Bow_Util.rendercontrollers()
 gmdllist = []
 for file in files:
