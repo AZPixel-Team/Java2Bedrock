@@ -51,7 +51,7 @@ for file in files:
                 path = data[f"texture_{i}"].split(":")[1]
                 files = glob.glob(f"staging/target/rp/attachables/{namespace}/{path}*.json")
                 for fa in files:
-                    if f"{path.split("/")[-1]}." in fa:
+                    if f"{path.split('/')[-1]}." in fa:
                         break
                 with open(fa, "r") as f:
                     dataA = json.load(f)
