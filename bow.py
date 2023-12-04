@@ -61,11 +61,11 @@ for file in files:
                     la = len(path)
                     lb = len(path.split("/")[-1])
                     l = path[:la-lb]
-                    apath = l + "animation." + path.split("/")[-1]
+                    apath = l + "animation." + path.split('/')[-1]
                     if i == 0:
                         files = glob.glob(f"staging/target/rp/animations/{namespace}/{apath}.json")
                         for fan in files:
-                            if f"{path.split("/")[-1]}.json" in fan:
+                            if f"{path.split('/')[-1]}.json" in fan:
                                 animationfile = fan
                                 break
                         mfile = fa
@@ -76,7 +76,7 @@ for file in files:
                     else:
                         files = glob.glob(f"staging/target/rp/animations/{namespace}/{apath}.json")
                         for fan in files:
-                            if f"{path.split("/")[-1]}.json" in fan:
+                            if f"{path.split('/')[-1]}.json" in fan:
                                 os.remove(fan)
                                 break
                         os.remove(fa)
