@@ -11,12 +11,9 @@ for file in files:
                 texture_file = json.load(f)["minecraft:attachable"]["description"]["textures"]["default"]
                 texture = f"staging/target/rp/{texture_file}.png"
             im = Image.open(texture).convert("RGBA")
-            im.putalpha(51)
-            pixels = im.load()
-            for x in range(im.height):
-                for y in range(im.width):
-                    if pixels[x,y] == (255,255,255,51) or pixels[x,y] == (0,0,0,51):
-                        pixels[x,y] = (0,0,0,0)
+            A = im.getchannel("A")
+            alpha = A.point(lambda i: 51 if i>0 else 0)
+            im.putalpha(alpha)
             im.save(texture)
             fdone.append(file)
         except Exception as e:
