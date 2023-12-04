@@ -58,12 +58,6 @@ for file in files:
                     f.close()
                     textures.append(dataA["minecraft:attachable"]["description"]["textures"]["default"])
                     geometry.append(dataA["minecraft:attachable"]["description"]["geometry"]["default"])
-                    apath = path[:len(path)-len(path.split("/")[-1])] + "animation." + path.split('/')[-1]
-                    files = glob.glob(f"staging/target/rp/animations/{namespace}/{apath}.json")
-                    for fan in files:
-                        if f"{path.split('/')[-1]}.json" in fan:
-                            Bow_Util.animations(fan)
-                            break
                     if i == 0:
                         mfile = fa
                         mdefault = dataA["minecraft:attachable"]["description"]["materials"]["default"]

@@ -94,31 +94,6 @@ class Bow_Util:
         with open("staging/target/rp/textures/item_texture.json", "w") as f:
             data["texture_data"][gmdl]["textures"] = texture
             json.dump(data, f)
-    def animations(file):
-        with open(file, "w") as f:
-            data = {
-                "format_version": "1.8.0",
-                "animations": {
-                    "animation.player.bow_custom.first_person": {
-                    "loop": True,
-                    "bones": {
-                        "rightitem": {
-                        "rotation": [ "c.is_first_person ? 30 : 0", "c.is_first_person ? -120 : 0", "c.is_first_person ? -60 : 0" ],
-                        "position": [ " c.is_first_person ? -6 : 0", "c.is_first_person ? -5 : 0", "c.is_first_person ? -2 : 0" ]
-                        }
-                    }
-                    },
-                    "animation.player.bow_custom": {
-                    "loop": True,
-                    "bones": {
-                        "rightitem": {
-                        "position": [ 0.5, -2, 0 ]
-                        }
-                    }
-                  }
-                }
-            }
-            json.dump(data, f)
     def acontroller(gmdllist):
         strlist = str(gmdllist)
         strlist = strlist.replace("[", "").replace("]", "")
