@@ -10,3 +10,5 @@ if os.getenv("ARMOR_CONVERSION") == "true":
     import armor
 if os.getenv("FONT_CONVERSION") == "true":
     import font
+if os.getenv("BOW_CONVERSION") == "true":
+    import bow

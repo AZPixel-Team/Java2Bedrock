@@ -142,6 +142,15 @@ body:
       options:
         - 'true'
         - 'false'
+  - type: dropdown
+    id: bow-conversion
+    attributes:
+      label: Bow Conversion
+      description: |
+        Conversion Bow default `false`.
+      options:
+        - 'true'
+        - 'false'
   - type: checkboxes
     id: terms
     attributes:
