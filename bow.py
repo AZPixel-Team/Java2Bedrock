@@ -58,30 +58,21 @@ for file in files:
                     f.close()
                     textures.append(dataA["minecraft:attachable"]["description"]["textures"]["default"])
                     geometry.append(dataA["minecraft:attachable"]["description"]["geometry"]["default"])
-                    la = len(path)
-                    lb = len(path.split("/")[-1])
-                    l = path[:la-lb]
-                    apath = l + "animation." + path.split('/')[-1]
+                    apath = path[:len(path)-len(path.split("/")[-1])] + "animation." + path.split('/')[-1]
+                    files = glob.glob(f"staging/target/rp/animations/{namespace}/{apath}.json")
+                    for fan in files:
+                        if f"{path.split('/')[-1]}.json" in fan:
+                            Bow_Util.animations(fan)
+                            break
                     if i == 0:
-                        files = glob.glob(f"staging/target/rp/animations/{namespace}/{apath}.json")
-                        for fan in files:
-                            if f"{path.split('/')[-1]}.json" in fan:
-                                animationfile = fan
-                                break
                         mfile = fa
                         mdefault = dataA["minecraft:attachable"]["description"]["materials"]["default"]
                         menchanted = dataA["minecraft:attachable"]["description"]["materials"]["enchanted"]
                         gmdl = dataA["minecraft:attachable"]["description"]["identifier"].split(":")[1]
                         gmdllist.append(f"geyser_custom:{gmdl}")
                     else:
-                        files = glob.glob(f"staging/target/rp/animations/{namespace}/{apath}.json")
-                        for fan in files:
-                            if f"{path.split('/')[-1]}.json" in fan:
-                                os.remove(fan)
-                                break
                         os.remove(fa)
             Bow_Util.item_texture(gmdl, textures[0])
-            Bow_Util.animations(animationfile)
             Bow_Util.write(mfile, gmdl, textures, geometry, mdefault, menchanted)
     except Exception as e:
         print(e)
