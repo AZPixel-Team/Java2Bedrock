@@ -88,7 +88,8 @@ class Bow_Util:
         with open("staging/target/rp/textures/item_texture.json", "r") as f:
             data = json.load(f)
         with open("staging/target/rp/textures/item_texture.json", "w") as f:
-            data["texture_data"][gmdl]["textures"] = texture
+            if gmdl in data:
+                data["texture_data"][gmdl]["textures"] = texture
             json.dump(data, f)
     def animation():
         with open("staging/target/rp/animations/bow_custom.animation.json","w") as f:
@@ -115,6 +116,11 @@ class Bow_Util:
                 }
                 }
             json.dump(data,f)
+    def is2Dbow(data):
+        if data in {"bones":[{"name":"geyser_custom","binding":"c.item_slot == 'head' ? 'head' : q.item_slot_to_bone_name(c.item_slot)","pivot":[0,8,0]},{"name":"geyser_custom_x","parent":"geyser_custom","pivot":[0,8,0]},{"name":"geyser_custom_y","parent":"geyser_custom_x","pivot":[0,8,0]},{"name":"geyser_custom_z","parent":"geyser_custom_y","pivot":[0,8,0],"texture_meshes":[{"texture":"default","position":[0,8,0],"rotation":[90,0,-180],"local_pivot":[8,0.5,8]}]}]}:
+            return True
+        else:
+            return False
     def acontroller(gmdllist):
         strlist = str(gmdllist)
         strlist = strlist.replace("[", "").replace("]", "")
