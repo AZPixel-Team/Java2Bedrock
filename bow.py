@@ -69,7 +69,8 @@ for file in files:
                         animations["third_person"] = "animation.player.bow_custom"
                         animations["wield_first_person_pull"] = "animation.bow.wield_first_person_pull"
                         gmdllist.append(f"geyser_custom:{gmdl}")
-                        if Bow_Util.is2Dbow(glob.glob(f"staging/target/rp/models/blocks/{namespace}/{path}.json")[0]):
+                        file = glob.glob(f"staging/target/rp/models/blocks/{namespace}/{path}.json")[0]
+                        if Bow_Util.is2Dbow(file):
                             geometry = ["geometry.bow_standby","geometry.bow_pulling_0","geometry.bow_pulling_1", "geometry.bow_pulling_2"]
                     else:
                         os.remove(fa)
@@ -80,5 +81,5 @@ for file in files:
         exc_type, exc_obj, exc_tb = sys.exc_info()
         fname = os.path.split(exc_tb.tb_frame.f_code.co_filename)[1]
         print(exc_type, fname, exc_tb.tb_lineno)
-        print(3)
+        print(e)
 Bow_Util.acontroller(gmdllist)
