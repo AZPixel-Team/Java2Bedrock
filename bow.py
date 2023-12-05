@@ -79,5 +79,8 @@ for file in files:
             Bow_Util.item_texture(gmdl, textures[0])
             Bow_Util.write(mfile, gmdl, textures, geometry, mdefault, menchanted, animations)
     except Exception as e:
-        print(e)
+        import sys
+        exc_type, exc_obj, exc_tb = sys.exc_info()
+        fname = os.path.split(exc_tb.tb_frame.f_code.co_filename)[1]
+        print(exc_type, fname, exc_tb.tb_lineno)
 Bow_Util.acontroller(gmdllist)
