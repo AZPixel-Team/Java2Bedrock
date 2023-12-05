@@ -117,7 +117,7 @@ class Bow_Util:
                 }
             json.dump(data,f)
     def is2Dbow(data):
-        if json.dumps(data) == json.dumps([{"name":"geyser_custom","binding":"c.item_slot == 'head' ? 'head' : q.item_slot_to_bone_name(c.item_slot)","pivot":[0,8,0]},{"name":"geyser_custom_x","parent":"geyser_custom","pivot":[0,8,0]},{"name":"geyser_custom_y","parent":"geyser_custom_x","pivot":[0,8,0]},{"name":"geyser_custom_z","parent":"geyser_custom_y","pivot":[0,8,0],"texture_meshes":[{"texture":"default","position":[0,8,0],"rotation":[90,0,-180],"local_pivot":[8,0.5,8]}]}]):
+        if True:
             return True
         else:
             return False
