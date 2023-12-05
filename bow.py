@@ -72,6 +72,7 @@ for file in files:
                     else:
                         os.remove(fa)
             Bow_Util.item_texture(gmdl, textures[0])
+            geometry = ["geometry.standby","geometry.bow_pulling_0","geometry.bow_pulling_1","geometry.bow_pulling_2"]
             Bow_Util.write(mfile, gmdl, textures, geometry, mdefault, menchanted, animations)
     except Exception as e:
         print(e)
