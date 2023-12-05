@@ -70,10 +70,8 @@ for file in files:
                         animations["wield_first_person_pull"] = "animation.bow.wield_first_person_pull"
                         gmdllist.append(f"geyser_custom:{gmdl}")
                         files = glob.glob(f"staging/target/rp/models/blocks/{namespace}/{path}.json")
-                        with open(files[0], "r") as f:
-                            data = json.load(f)
-                            if Bow_Util.is2Dbow(data["minecraft:geometry"]["bones"]):
-                                geometry = ["geometry.bow_standby","geometry.bow_pulling_0","geometry.bow_pulling_1", "geometry.bow_pulling_2"]
+                        if Bow_Util.is2Dbow(files):
+                            geometry = ["geometry.bow_standby","geometry.bow_pulling_0","geometry.bow_pulling_1", "geometry.bow_pulling_2"]
                     else:
                         os.remove(fa)
             Bow_Util.item_texture(gmdl, textures[0])
