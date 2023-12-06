@@ -58,7 +58,10 @@ for file in files:
                     dataA = json.load(f)
                     f.close()
                     textures.append(dataA["minecraft:attachable"]["description"]["textures"]["default"])
-                    geometry.append(dataA["minecraft:attachable"]["description"]["geometry"]["default"])
+                    if Bow_Util.is2Dbow(glob.glob(f"staging/target/rp/models/blocks/{namespace}/{path}.json")[0]):
+                        if i == 0: geometry.append("geometry.bow_standby")
+                        else: geometry.append(f"geometry.bow_pulling_{i}")
+                    else: geometry.append(dataA["minecraft:attachable"]["description"]["geometry"]["default"])
                     if i == 0:
                         mfile = fa
                         mdefault = dataA["minecraft:attachable"]["description"]["materials"]["default"]
@@ -69,12 +72,9 @@ for file in files:
                         animations["third_person"] = "animation.player.bow_custom"
                         animations["wield_first_person_pull"] = "animation.bow.wield_first_person_pull"
                         gmdllist.append(f"geyser_custom:{gmdl}")
-                        file = glob.glob(f"staging/target/rp/models/blocks/{namespace}/{path}.json")[0]
-                        if Bow_Util.is2Dbow(file):
-                            geometry = ["geometry.bow_standby","geometry.bow_pulling_0","geometry.bow_pulling_1", "geometry.bow_pulling_2"]
+                        Bow_Util.item_texture(gmdl, textures[0])
                     else:
                         os.remove(fa)
-            Bow_Util.item_texture(gmdl, textures[0])
             Bow_Util.write(mfile, gmdl, textures, geometry, mdefault, menchanted, animations)
     except Exception as e:
         print(e)

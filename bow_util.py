@@ -87,10 +87,10 @@ class Bow_Util:
     def item_texture(gmdl, texture):
         with open("staging/target/rp/textures/item_texture.json", "r") as f:
             data = json.load(f)
-        with open("staging/target/rp/textures/item_texture.json", "w") as f:
-            if gmdl in data:
+        if gmdl in data["texture_data"]:
+            with open("staging/target/rp/textures/item_texture.json", "w") as f:
                 data["texture_data"][gmdl]["textures"] = texture
-            json.dump(data, f)
+                json.dump(data,f, indent=4)
     def animation():
         with open("staging/target/rp/animations/bow_custom.animation.json","w") as f:
             data = {
