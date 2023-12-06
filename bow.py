@@ -60,7 +60,7 @@ for file in files:
                     textures.append(dataA["minecraft:attachable"]["description"]["textures"]["default"])
                     if Bow_Util.is2Dbow(glob.glob(f"staging/target/rp/models/blocks/{namespace}/{path}.json")[0]):
                         if i == 0: geometry.append("geometry.bow_standby")
-                        else: geometry.append(f"geometry.bow_pulling_{i}")
+                        else: geometry.append(f"geometry.bow_pulling_{i-1}")
                     else: geometry.append(dataA["minecraft:attachable"]["description"]["geometry"]["default"])
                     if i == 0:
                         mfile = fa
