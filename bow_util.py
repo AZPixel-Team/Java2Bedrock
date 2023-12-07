@@ -32,9 +32,30 @@ class Bow_Util:
                             "v.charge_amount = math.clamp((q.main_hand_item_max_duration - (q.main_hand_item_use_duration - q.frame_alpha + 1.0)) / 10.0, 0.0, 1.0f);",
                             "v.total_frames = 3;",
                             "v.step = v.total_frames / 120;",
-                            "v.frame = query.is_using_item ? math.clamp((v.frame ?? 0) + v.step, 1, v.total_frames) : 0;"
+                            "v.frame = query.is_using_item ? math.clamp((v.frame ?? 0) + v.step, 1, v.total_frames) : 0;",
+                            "v.main_hand = c.item_slot == 'main_hand';",
+                            "v.off_hand = c.item_slot == 'off_hand';",
+                            "v.head = c.item_slot == 'head';"
                             ],
                             "animate": [
+                            {
+                                "thirdperson_main_hand": "v.main_hand && !c.is_first_person"
+                            },
+                            {
+                                "thirdperson_off_hand": "v.off_hand && !c.is_first_person"
+                            },
+                            {
+                                "thirdperson_head": "v.head && !c.is_first_person"
+                            },
+                            {
+                                "firstperson_main_hand": "v.main_hand && c.is_first_person"
+                            },
+                            {
+                                "firstperson_off_hand": "v.off_hand && c.is_first_person"
+                            },
+                            {
+                                "firstperson_head": "c.is_first_person && v.head"
+                            },
                             {
                                 "wield": "c.is_first_person"
                             },
