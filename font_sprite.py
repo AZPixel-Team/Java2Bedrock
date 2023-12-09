@@ -23,7 +23,6 @@ def sprite(glyph, spritesheet = None, tile = None):
     
     files = os.listdir(f"export/{glyph}")
     files.sort()
-    print(files)
     
     for current_file in files:
         try:
