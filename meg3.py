@@ -13,8 +13,8 @@ for file in files:
             im = Image.open(texture).convert("RGBA")
             im.putalpha(51)
             pixels = im.load()
-            for x in range(im.height):
-                for y in range(im.width):
+            for x in range(im.width):
+                for y in range(im.height):
                     if pixels[x,y] == (0,0,0,51):
                         pixels[x,y] = (0,0,0,0)
             im.save(texture)
