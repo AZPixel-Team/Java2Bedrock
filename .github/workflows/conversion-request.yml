@@ -136,6 +136,7 @@ jobs:
             staging/target/geyser_mappings.json
             staging/target/scratch_files.zip
             staging/config.json
+            staging
   post-result:
     runs-on: ubuntu-latest
     needs: convert-pack

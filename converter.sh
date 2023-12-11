@@ -1319,7 +1319,6 @@ python manager.py
 cd ./staging
 
 # cleanup
-rm -rf assets && rm -f pack.mcmeta && rm -f pack.png
 if [[ ${save_scratch} != "true" ]] 
 then
   rm -rf scratch_files
