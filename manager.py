@@ -1,4 +1,7 @@
-import os
+import zipfile, os
+
+with zipfile.ZipFile("staging/input_pack.zip", "r") as file:
+    file.extractall("pack/")
 if os.getenv("SOUNDS_CONVERSION") == "true":
     import sound
 if os.getenv("ATTACHABLE_MATERIAL") == "entity_emissive_alpha_one_sided" and os.getenv("MEG3_FIX") == "true":

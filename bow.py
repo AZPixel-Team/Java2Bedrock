@@ -3,8 +3,8 @@ import json
 import glob
 from bow_util import Bow_Util
 
-if os.path.exists("staging/assets/minecraft/models/item/bow.json"):
-    with open("staging/assets/minecraft/models/item/bow.json") as f:
+if os.path.exists("pack/assets/minecraft/models/item/bow.json"):
+    with open("pack/assets/minecraft/models/item/bow.json") as f:
         data = json.load(f)
         predicate = [d["predicate"] for d in data["overrides"]]
         model = [d["model"] for d in data["overrides"]]

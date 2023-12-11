@@ -5,7 +5,7 @@ import glob, os, json
 
 lines = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, "a", "b", "c", "d", "e", "f"]
 try:
-    with open("staging/assets/minecraft/font/default.json", "r") as f:
+    with open("pack/assets/minecraft/font/default.json", "r") as f:
         data = json.load(f)
         symbols = [d['chars'] for d in data['providers']]
         paths = [d['file'] for d in data['providers']]
@@ -113,7 +113,7 @@ def converterpack(glyph):
                     try:
                         namespace = path.split(":")[0]
                         pathnew = path.split(":")[1]
-                        imagefont = Image.open(f"staging/assets/{namespace}/textures/{pathnew}")
+                        imagefont = Image.open(f"pack/assets/{namespace}/textures/{pathnew}")
                         image = imagefont.copy()
                         image.save(f"images/{glyph}/0x{glyph}{symbol}.png", "PNG")
                     except Exception as e:
@@ -121,7 +121,7 @@ def converterpack(glyph):
                         continue
                 else:
                     try:
-                        imagefont = Image.open(f"staging/assets/minecraft/textures/{path}")
+                        imagefont = Image.open(f"pack/assets/minecraft/textures/{path}")
                         image = imagefont.copy()
                         image.save(f"images/{glyph}/0x{glyph}{symbol}.png", "PNG")
                     except Exception as e: 
