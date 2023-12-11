@@ -158,8 +158,140 @@ if test -d "./assets/minecraft/models/item"
 then 
   status_message completion "Minecraft namespace item folder found."
 else
-  status_message error "Invalid resource pack! No item or block folders exist. No predicate definitions be found."
-  exit 1
+  # create our initial directories for bp & rp
+  status_message process "Generating initial directory strucutre for our bedrock packs"
+  mkdir -p ./target/rp/models/blocks && mkdir -p ./target/rp/textures && mkdir -p ./target/rp/attachables && mkdir -p ./target/rp/animations && mkdir -p ./target/bp/blocks && mkdir -p ./target/bp/items
+
+  # copy over our pack.png if we have one
+  if test -f "./pack.png"; then
+      cp ./pack.png ./target/rp/pack_icon.png && cp ./pack.png ./target/bp/pack_icon.png
+  fi
+
+  # generate uuids for our manifests
+  uuid1=($(uuidgen))
+  uuid2=($(uuidgen))
+  uuid3=($(uuidgen))
+  uuid4=($(uuidgen))
+
+  # get pack description if we have one
+  pack_desc="$(jq -r '(.pack.description // "Geyser 3D Items Resource Pack")' ./pack.mcmeta)"
+
+  # generate rp manifest.json
+  status_message process "Generating resource pack manifest"
+  jq -c --arg pack_desc "${pack_desc}" --arg uuid1 "${uuid1}" --arg uuid2 "${uuid2}" -n '
+  {
+      "format_version": 2,
+      "header": {
+          "description": "Adds 3D items for use with a Geyser proxy",
+          "name": $pack_desc,
+          "uuid": ($uuid1 | ascii_downcase),
+          "version": [1, 0, 0],
+          "min_engine_version": [1, 18, 3]
+      },
+      "modules": [
+          {
+              "description": "Adds 3D items for use with a Geyser proxy",
+              "type": "resources",
+              "uuid": ($uuid2 | ascii_downcase),
+              "version": [1, 0, 0]
+          }
+      ]
+  }
+  ' | sponge ./target/rp/manifest.json
+
+  # generate bp manifest.json
+  status_message process "Generating behavior pack manifest"
+  jq -c --arg pack_desc "${pack_desc}" --arg uuid1 "${uuid1}" --arg uuid3 "${uuid3}" --arg uuid4 "${uuid4}" -n '
+  {
+      "format_version": 2,
+      "header": {
+          "description": "Adds 3D items for use with a Geyser proxy",
+          "name": $pack_desc,
+          "uuid": ($uuid3 | ascii_downcase),
+          "version": [1, 0, 0],
+          "min_engine_version": [ 1, 18, 3]
+      },
+      "modules": [
+          {
+              "description": "Adds 3D items for use with a Geyser proxy",
+              "type": "data",
+              "uuid": ($uuid4 | ascii_downcase),
+              "version": [1, 0, 0]
+          }
+      ],
+      "dependencies": [
+          {
+              "uuid": ($uuid1 | ascii_downcase),
+              "version": [1, 0, 0]
+          }
+      ]
+  }
+  ' | sponge ./target/bp/manifest.json
+
+  # generate rp terrain_texture.json
+  status_message process "Generating resource pack terrain texture definition"
+  jq -nc '
+  {
+    "resource_pack_name": "geyser_custom",
+    "texture_name": "atlas.terrain",
+    "texture_data": {
+    }
+  }
+  ' | sponge ./target/rp/textures/terrain_texture.json
+
+  # generate rp item_texture.json
+  status_message process "Generating resource pack item texture definition"
+  jq -nc '
+  {
+    "resource_pack_name": "geyser_custom",
+    "texture_name": "atlas.items",
+    "texture_data": {}
+  }
+  ' | sponge ./target/rp/textures/item_texture.json
+
+  status_message process "Generating resource pack disabling animation"
+  # generate our disabling animation
+  jq -nc '
+  {
+    "format_version": "1.8.0",
+    "animations": {
+      "animation.geyser_custom.disable": {
+        "loop": true,
+        "override_previous_animation": true,
+        "bones": {
+          "geyser_custom": {
+            "scale": 0
+          }
+        }
+      }
+    }
+  }
+  ' | sponge ./target/rp/animations/animation.geyser_custom.disable.json
+  cd -
+  python manager.py
+  cd ./staging
+  # cleanup
+  rm -rf assets && rm -f pack.mcmeta && rm -f pack.png
+  if [[ ${save_scratch} != "true" ]] 
+  then
+    rm -rf scratch_files
+    status_message critical "Deleted scratch files"
+  else
+    cd ./scratch_files > /dev/null && zip -rq8 scratch_files.zip . -x "*/.*" && cd .. > /dev/null && mv ./scratch_files/scratch_files.zip ./target/scratch_files.zip
+    status_message completion "Archived scratch files\n"
+  fi
+
+  status_message process "Compressing output packs"
+  mkdir ./target/packaged
+  cd ./target/rp > /dev/null && zip -rq8 geyser_resources_preview.mcpack . -x "*/.*" && cd ../.. > /dev/null && mv ./target/rp/geyser_resources_preview.mcpack ./target/packaged/geyser_resources_preview.mcpack
+  cd ./target/bp > /dev/null && zip -rq8 geyser_behaviors_preview.mcpack . -x "*/.*" && cd ../.. > /dev/null && mv ./target/bp/geyser_behaviors_preview.mcpack ./target/packaged/geyser_behaviors_preview.mcpack
+  cd ./target/packaged > /dev/null && zip -rq8 geyser_addon.mcaddon . -i "*_preview.mcpack" && cd ../.. > /dev/null
+  jq 'delpaths([paths | select(.[-1] | strings | startswith("gmdl_atlas_"))])' ./target/rp/textures/terrain_texture.json | sponge ./target/rp/textures/terrain_texture.json
+  cd ./target/rp > /dev/null && zip -rq8 geyser_resources.mcpack . -x "*/.*" && cd ../.. > /dev/null && mv ./target/rp/geyser_resources.mcpack ./target/packaged/geyser_resources.mcpack
+  mkdir ./target/unpackaged
+  mv ./target/rp ./target/unpackaged/rp && mv ./target/bp ./target/unpackaged/bp
+
+  exit
 fi
 
 # Download geyser mappings
@@ -1182,6 +1314,10 @@ if [ -f sprites.json ]; then
   
 fi
 
+cd -
+python manager.py
+cd ./staging
+
 # cleanup
 rm -rf assets && rm -f pack.mcmeta && rm -f pack.png
 if [[ ${save_scratch} != "true" ]] 
@@ -1192,10 +1328,6 @@ else
   cd ./scratch_files > /dev/null && zip -rq8 scratch_files.zip . -x "*/.*" && cd .. > /dev/null && mv ./scratch_files/scratch_files.zip ./target/scratch_files.zip
   status_message completion "Archived scratch files\n"
 fi
-
-cd -
-python manager.py
-cd ./staging
 
 status_message process "Compressing output packs"
 mkdir ./target/packaged

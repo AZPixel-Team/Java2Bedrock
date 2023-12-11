@@ -1,6 +1,6 @@
 import json, glob, os, shutil
 
-files = glob.glob("pack/assets/**/sounds.json")
+files = glob.glob("staging/assets/**/sounds.json")
 os.makedirs("staging/target/rp/sounds", exist_ok=True)
 with open("staging/target/rp/sounds/sound_definitions.json", "w") as f:
     f.write('{"format_version": "1.14.0", "sound_definitions": {}}')
@@ -26,12 +26,12 @@ for file in files:
                             b = (sound["name"].split(":")[-1] + ".ogg").split((sound['name'].split(':')[-1] + ".ogg").split("/")[-1])[0]
                             sound["name"] = "sounds/" + sound["name"].split(":")[-1]
                             os.makedirs("staging/target/rp/sounds/" + b, exist_ok=True)
-                            shutil.copyfile(f"pack/assets/minecraft/{sound['name'].split(':')[-1]}.ogg", f"staging/target/rp/{sound['name'].split(':')[-1]}.ogg")
+                            shutil.copyfile(f"staging/assets/minecraft/{sound['name'].split(':')[-1]}.ogg", f"staging/target/rp/{sound['name'].split(':')[-1]}.ogg")
                             listsound.append(sound)
                         else:
                             b = (sound.split(":")[-1] + ".ogg").split((sound.split(':')[-1] + ".ogg").split("/")[-1])[0]
                             os.makedirs("staging/target/rp/sounds/" + b, exist_ok=True)
-                            shutil.copyfile(f"pack/assets/minecraft/sounds/{sound.split(':')[-1]}.ogg", f"staging/target/rp/sounds/{sound.split(':')[-1]}.ogg")
+                            shutil.copyfile(f"staging/assets/minecraft/sounds/{sound.split(':')[-1]}.ogg", f"staging/target/rp/sounds/{sound.split(':')[-1]}.ogg")
                             a = "sounds/" + sound.split(":")[-1]
                             listsound.append(a)
                     except Exception as e:
