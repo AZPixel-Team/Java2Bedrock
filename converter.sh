@@ -155,8 +155,7 @@ fi
 
 # ensure the directory that would contain predicate definitions exists
 if test -d "./assets/minecraft/models/item"
-then 
-  else
+then
   # create our initial directories for bp & rp
   status_message process "Generating initial directory strucutre for our bedrock packs"
   mkdir -p ./target/rp/models/blocks && mkdir -p ./target/rp/textures && mkdir -p ./target/rp/attachables && mkdir -p ./target/rp/animations && mkdir -p ./target/bp/blocks && mkdir -p ./target/bp/items
@@ -289,8 +288,6 @@ then
   cd ./target/rp > /dev/null && zip -rq8 geyser_resources.mcpack . -x "*/.*" && cd ../.. > /dev/null && mv ./target/rp/geyser_resources.mcpack ./target/packaged/geyser_resources.mcpack
   mkdir ./target/unpackaged
   mv ./target/rp ./target/unpackaged/rp && mv ./target/bp ./target/unpackaged/bp
-
-  exit
 else
   # create our initial directories for bp & rp
   status_message process "Generating initial directory strucutre for our bedrock packs"
