@@ -22,3 +22,4 @@ for file in files:
         except Exception as e:
             print(e)
             print("Error texture:" + texture)
+print(fdone)
