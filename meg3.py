@@ -2,7 +2,7 @@ from PIL import Image
 import json
 import glob
 import os
-files = glob.glob("staging/target/rp/attachables/modelengine/**/*.json")
+files = glob.glob("pack/target/rp/attachables/modelengine/**/*.json")
 fdone = []
 for file in files:
     if not file in fdone:
@@ -22,3 +22,4 @@ for file in files:
         except Exception as e:
             print(e)
             print("Error texture:" + texture)
+print(fdone)
