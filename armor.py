@@ -45,8 +45,12 @@ def write_armor(file, gmdl, layer, i):
 		f.write(json.dumps(ajson))
 
 while i < 4:
-	with open(f"pack/assets/minecraft/models/item/{item_type[i]}.json", "r") as f:
-		data = json.load(f)
+	try:
+		with open(f"pack/assets/minecraft/models/item/{item_type[i]}.json", "r") as f:
+			data = json.load(f)
+	except:
+		i += 1
+		continue
 	for override in data["overrides"]:
 		custom_model_data = override["predicate"]["custom_model_data"]
 		model = override["model"]
