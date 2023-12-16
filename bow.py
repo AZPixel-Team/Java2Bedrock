@@ -66,10 +66,10 @@ for file in files:
                     if i == 0:
                         if is2Dbow:
                             animate = [{"wield":"c.is_first_person"},{"third_person":"!c.is_first_person"},{"wield_first_person_pull":"query.main_hand_item_use_duration > 0.0f && c.is_first_person"}]
-                            pre_animation = ["v.charge_amount = math.clamp((q.main_hand_item_max_duration - (q.main_hand_item_use_duration - q.frame_alpha + 1.0)) / 10.0, 0.0, 1.0f);","v.total_frames = 3;","v.step = v.total_frames / 120;","v.frame = query.is_using_item ? math.clamp((v.frame ?? 0) + v.step, 1, v.total_frames) : 0;"]
+                            pre_animation = ["v.charge_amount = math.clamp((q.main_hand_item_max_duration - (q.main_hand_item_use_duration - q.frame_alpha + 1.0)) / 10.0, 0.0, 1.0f);","v.total_frames = 3;","v.step = v.total_frames / 60;","v.frame = query.is_using_item ? math.clamp((v.frame ?? 0) + v.step, 1, v.total_frames) : 0;"]
                         else:
                             animate = [{"thirdperson_main_hand":"v.main_hand && !c.is_first_person"},{"thirdperson_off_hand":"v.off_hand && !c.is_first_person"},{"thirdperson_head":"v.head && !c.is_first_person"},{"firstperson_main_hand":"v.main_hand && c.is_first_person"},{"firstperson_off_hand":"v.off_hand && c.is_first_person"},{"firstperson_head":"c.is_first_person && v.head"}]
-                            pre_animation = ["v.charge_amount = math.clamp((q.main_hand_item_max_duration - (q.main_hand_item_use_duration - q.frame_alpha + 1.0)) / 10.0, 0.0, 1.0f);","v.total_frames = 3;","v.step = v.total_frames / 120;","v.frame = query.is_using_item ? math.clamp((v.frame ?? 0) + v.step, 1, v.total_frames) : 0;","v.main_hand = c.item_slot == 'main_hand';","v.off_hand = c.item_slot == 'off_hand';","v.head = c.item_slot == 'head';"]
+                            pre_animation = ["v.charge_amount = math.clamp((q.main_hand_item_max_duration - (q.main_hand_item_use_duration - q.frame_alpha + 1.0)) / 10.0, 0.0, 1.0f);","v.total_frames = 3;","v.step = v.total_frames / 60;","v.frame = query.is_using_item ? math.clamp((v.frame ?? 0) + v.step, 1, v.total_frames) : 0;","v.main_hand = c.item_slot == 'main_hand';","v.off_hand = c.item_slot == 'off_hand';","v.head = c.item_slot == 'head';"]
                         mfile = fa
                         mdefault = dataA["minecraft:attachable"]["description"]["materials"]["default"]
                         menchanted = dataA["minecraft:attachable"]["description"]["materials"]["enchanted"]
