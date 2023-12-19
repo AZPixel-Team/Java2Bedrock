@@ -12,7 +12,7 @@ try:
         heights = [d['height'] for d in data['providers']]
         ascents = [d['ascent'] for d in data['providers']]
 except Exception as e:
-    print("[FONT ERROR]"
+    print("[FONT ERROR]")
     print(e)
     exit()
 
