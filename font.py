@@ -7,14 +7,18 @@ lines = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, "a", "b", "c", "d", "e", "f"]
 try:
     with open("pack/assets/minecraft/font/default.json", "r") as f:
         data = json.load(f)
-        symbols = [d['chars'] for d in data['providers']]
-        paths = [d['file'] for d in data['providers']]
-        heights = [d['height'] for d in data['providers']]
-        ascents = [d['ascent'] for d in data['providers']]
 except Exception as e:
     print("[FONT ERROR]")
     print(e)
-    exit()
+symbols = paths = heights = ascents = []
+for d in data['providers']:
+    try:
+        symbols.append(d['chars'])
+        paths.append(d['file'])
+        heights.append(d['height'])
+        ascents.append(d['ascent'])
+    except:
+        pass
 
 def createfolder(glyph):
     os.makedirs(f"images/{glyph}", exist_ok = True)
