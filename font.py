@@ -18,7 +18,7 @@ for d in data['providers']:
         heights.append(d['height'])
         ascents.append(d['ascent'])
     except:
-        pass
+        continue
 
 def createfolder(glyph):
     os.makedirs(f"images/{glyph}", exist_ok = True)
@@ -94,7 +94,6 @@ print("[FONT FILE]")
 print(glyphs)
 
 listglyphdone = []
-    
 def converterpack(glyph):
     createfolder(glyph)
     if len(symbols) == len(paths):
