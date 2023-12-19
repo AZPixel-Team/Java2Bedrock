@@ -10,7 +10,10 @@ try:
 except Exception as e:
     print("[FONT ERROR]")
     print(e)
-symbols = paths = heights = ascents = []
+symbols = []
+paths = []
+heights = []
+ascents = []
 for d in data['providers']:
     try:
         symbols.append(d['chars'])
