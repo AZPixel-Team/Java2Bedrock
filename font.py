@@ -86,6 +86,7 @@ for i in symbols:
         ab = a[:2]
         glyphs.append(ab.upper())
 glyphs = list(dict.fromkeys(glyphs))
+print("[FONT FILE]")
 print(glyphs)
 
 listglyphdone = []
