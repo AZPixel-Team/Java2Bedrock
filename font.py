@@ -80,15 +80,16 @@ def imagetoexport(glyph, blankimg):
 glyphs = []
 for i in symbols:
     if i not in glyphs:
-        symbolbe = ''.join(i)
         try:
+            symbolbe = ''.join(i)
             sbh = (hex(ord(symbolbe)))
+            a = sbh[2:]
+            ab = a[:2]
+            glyphs.append(ab.upper())
         except:
             print(f"Symbol Error: {symbolbe}")
+            symbols.remove(i)
             continue
-        a = sbh[2:]
-        ab = a[:2]
-        glyphs.append(ab.upper())
 glyphs = list(dict.fromkeys(glyphs))
 print("[FONT FILE]")
 print(glyphs)
