@@ -7,9 +7,14 @@ texture_done = []
 for file in files:
     try:
         with open(file, "r") as f:
-            texture_file = json.load(f)["minecraft:attachable"]["description"]["textures"]["default"]
+            data = json.load(f)
+            texture_file = data["minecraft:attachable"]["description"]["textures"]["default"]
             texture = f"staging/target/rp/{texture_file}.png"
-            if texture_file in texture_done: continue
+        with open(file, "w") as f:
+            if not os.getenv("ATTACHABLE_MATERIAL") == "entity_emissive_alpha_one_sided":
+                data["minecraft:attachable"]["description"]["materials"]["default"] = "entity_emissive_alpha_one_sided"
+                data["minecraft:attachable"]["description"]["materials"]["enchanted"] = "entity_emissive_alpha_one_sided"
+        if texture_file in texture_done: continue
         im = Image.open(texture).convert("RGBA")
         im.putalpha(51)
         pixels = im.load()
