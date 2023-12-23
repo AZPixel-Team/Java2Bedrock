@@ -7,7 +7,7 @@ try:
     if os.getenv("SOUNDS_CONVERSION") == "true": import sound
 except Exception as e: print(e)
 try:
-    if os.getenv("ATTACHABLE_MATERIAL") == "entity_emissive_alpha_one_sided" and os.getenv("MEG3_FIX") == "true": import meg3
+    if os.getenv("MEG3_FIX") == "true": import meg3
 except Exception as e: print(e)
 try:
     if os.getenv("ARMOR_CONVERSION") == "true": import armor
