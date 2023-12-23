@@ -21,7 +21,7 @@ if os.path.exists("pack/assets/minecraft/models/item/bow.json"):
                     i = 3
         except:
             pass
-        fpath = (f"cache/{p['custom_model_data']}.json")
+        fpath = (f"cache/bow/{p['custom_model_data']}.json")
         if not os.path.exists(fpath):
             os.makedirs(os.path.dirname(fpath), exist_ok=True)
             with open(fpath, "w") as f:
@@ -36,7 +36,7 @@ if os.path.exists("pack/assets/minecraft/models/item/bow.json"):
             data[f'texture_{i}'] = m
             json.dump(data, f, indent=2)
 
-files = glob.glob("cache/*.json")
+files = glob.glob("cache/bow/*.json")
 Bow_Util.animation()
 Bow_Util.rendercontrollers()
 gmdllist = []

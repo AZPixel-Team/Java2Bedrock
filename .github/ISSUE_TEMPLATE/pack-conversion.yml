@@ -151,6 +151,15 @@ body:
       options:
         - 'true'
         - 'false'
+  - type: dropdown
+    id: shield-conversion
+    attributes:
+      label: Shield Conversion
+      description: |
+        Conversion Shield default `false`.
+      options:
+        - 'true'
+        - 'false'
   - type: checkboxes
     id: terms
     attributes:
