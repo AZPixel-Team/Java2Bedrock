@@ -46,28 +46,9 @@ for file in glob.glob("cache/shield/*.json"):
             if i == "default":
                 saf = fa
                 adata = dataA
-                animation["mainhand.first_person"] = animationitem["firstperson_main_hand"]
-                animation["mainhand.thierd_person"] = animationitem["thirdperson_main_hand"]
-                animation["offhand.first_person"] = animationitem["firstperson_off_hand"]
-                animation["offhand.thierd_person"] = animationitem["thirdperson_off_hand"]
-                animate = [
-                    {"mainhand.thierd_person.block": f"!c.is_first_person && c.item_slot == 'main_hand' && q.is_item_name_any('slot.weapon.mainhand', '{gmdl}') && query.is_sneaking"},
-                    {"mainhand.first_person.block": f"c.is_first_person && c.item_slot == 'main_hand' && q.is_item_name_any('slot.weapon.mainhand', '{gmdl}') && query.is_sneaking"},
-                    {"mainhand.first_person": f"c.is_first_person && c.item_slot == 'main_hand' && q.is_item_name_any('slot.weapon.mainhand', '{gmdl}') && !query.is_sneaking"},
-                    {"mainhand.thierd_person": f"!c.is_first_person && c.item_slot == 'main_hand' && q.is_item_name_any('slot.weapon.mainhand', '{gmdl}') && !query.is_sneaking"},
-
-                    {"offhand.thierd_person.block": f"!c.is_first_person && c.item_slot == 'off_hand' && q.is_item_name_any('slot.weapon.offhand', '{gmdl}') && query.is_sneaking"},
-                    {"offhand.first_person.block": f"c.is_first_person && c.item_slot == 'off_hand' && q.is_item_name_any('slot.weapon.offhand', '{gmdl}') && query.is_sneaking"},
-                    {"offhand.first_person": f"c.is_first_person && c.item_slot == 'off_hand' && q.is_item_name_any('slot.weapon.offhand', '{gmdl}') && !query.is_sneaking"},
-                    {"offhand.thierd_person": f"!c.is_first_person && c.item_slot == 'off_hand' && q.is_item_name_any('slot.weapon.offhand', '{gmdl}') && !query.is_sneaking"}
-                ]
             else:
-                animation["mainhand.first_person.block"] = animationitem["firstperson_main_hand"]
-                animation["mainhand.thierd_person.block"] = animationitem["thirdperson_main_hand"]
-                animation["offhand.first_person.block"] = animationitem["firstperson_off_hand"]
-                animation["offhand.thierd_person.block"] = animationitem["thirdperson_off_hand"]
                 os.remove(fa)
         with open(saf, "w") as f:
-            adata["minecraft:attachable"]["description"]["animations"] = animation
-            adata["minecraft:attachable"]["description"]["scripts"]["animate"] = animate
+            adata["minecraft:attachable"]["description"]["animations"] = {"wield":"controller.animation.shield.wield","wield_main_hand_first_person":"animation.shield.wield_main_hand_first_person","wield_off_hand_first_person":"animation.shield.wield_off_hand_first_person","wield_first_person_block":"animation.shield.wield_first_person_blocking","wield_main_hand_first_person_block":"animation.shield.wield_main_hand_first_person_blocking","wield_off_hand_first_person_block":"animation.shield.wield_off_hand_first_person_blocking","wield_third_person":"animation.shield.wield_third_person"}
+            adata["minecraft:attachable"]["description"]["scripts"] = {"initialize":["variable.main_hand_first_person_pos_x =  5.3;","variable.main_hand_first_person_pos_y = 26.0;","variable.main_hand_first_person_pos_z = 0.4;","variable.main_hand_first_person_rot_x = 91.0;","variable.main_hand_first_person_rot_y = 65.0;","variable.main_hand_first_person_rot_z = -43.0;","variable.off_hand_first_person_pos_x = -13.5;","variable.off_hand_first_person_pos_y = -5.8;","variable.off_hand_first_person_pos_z = 5.1;","variable.off_hand_first_person_with_bow_pos_z = -25.0;","variable.off_hand_first_person_rot_x = 1.0;","variable.off_hand_first_person_rot_y = 176.0;","variable.off_hand_first_person_rot_z = -2.5;"],"pre_animation":["variable.is_blocking_main_hand = query.blocking && !query.is_item_name_any('slot.weapon.offhand', 'minecraft:shield') && query.is_item_name_any('slot.weapon.mainhand', 'minecraft:shield');","variable.is_blocking_off_hand = query.blocking && query.is_item_name_any('slot.weapon.offhand', 'minecraft:shield');","variable.is_using_bow = (query.get_equipped_item_name == 'bow') && (query.main_hand_item_use_duration > 0.0f);"],"animate":["wield"]}
             json.dump(adata, f)
