@@ -117,7 +117,7 @@ jobs:
           MEG3_FIX: ${{ needs.get-pack-info.outputs.meg3_fix }}
           SOUNDS_CONVERSION: ${{ needs.get-pack-info.outputs.sounds_conversion }}
           BOW_CONVERSION: ${{ needs.get-pack-info.outputs.bow_conversion }}
-          SHIELD_CONVERSION: $${{ needs.get-pack-info.outputs.shield_conversion }}
+          SHIELD_CONVERSION: ${{ needs.get-pack-info.outputs.shield_conversion }}
         run: |
           mkdir -p staging
           cp converter.sh staging/
