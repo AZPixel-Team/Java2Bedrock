@@ -7,17 +7,17 @@ with open("staging/target/rp/sounds/sound_definitions.json", "w") as f:
 for file in files:
     with open(file, "r") as f:
         data = json.load(f)
-    namespace = file.split("/")[2]
+    namespace = file.split('\\')[1]
     names = [d for d in data]
     with open("staging/target/rp/sounds/sound_definitions.json", "r") as f:
         dj = json.load(f)
         for name in names:
-            dj['sound_definitions'][f"{name}"] = {}
+            dj['sound_definitions'][f"{namespace}:{name}"] = {}
             with open("staging/target/rp/sounds/sound_definitions.json", "w") as f:
                 try:
-                    dj['sound_definitions'][f"{name}"]["category"] = data[name]["category"]
+                    dj['sound_definitions'][f"{namespace}:{name}"]["category"] = data[name]["category"]
                 except:
-                    dj['sound_definitions'][f"{name}"]["category"] = "neutral"
+                    dj['sound_definitions'][f"{namespace}:{name}"]["category"] = "neutral"
                 sounds = data[name]["sounds"]
                 listsound = []
                 for sound in sounds:
