@@ -7,6 +7,7 @@ with open("staging/target/rp/sounds/sound_definitions.json", "w") as f:
 for file in files:
     with open(file, "r") as f:
         data = json.load(f)
+    namespace = file.split("/")[2]
     names = [d for d in data]
     with open("staging/target/rp/sounds/sound_definitions.json", "r") as f:
         dj = json.load(f)
@@ -36,5 +37,5 @@ for file in files:
                             listsound.append(a)
                     except Exception as e:
                         print(e)
-                dj["sound_definitions"][f"{name}"]["sounds"] = listsound
+                dj["sound_definitions"][f"{namespace}:{name}"]["sounds"] = listsound
                 json.dump(dj, f, indent=2)
