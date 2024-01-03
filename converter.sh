@@ -1011,7 +1011,7 @@ do
               },
               "geyser_custom_x": {
                 "position": (if .display.firstperson_lefthand.translation then [((.display.firstperson_lefthand.translation[0]) + 20), (.display.firstperson_lefthand.translation[1]), (- .display.firstperson_lefthand.translation[2])] else null end),
-                "rotation": (if .display.firstperson_lefthand.rotation then [(- .display.firstperson_lefthand.rotation[0]), 0, 0] else [0.1, 0.1, 0.1] end),
+                "rotation": (if .display.firstperson_lefthand.rotation then [(.display.firstperson_lefthand.rotation[0]), 0, 180] else [0.1, 0.1, 0.1] end),
                 "scale": (if .display.firstperson_lefthand.scale then (.display.firstperson_lefthand.scale) else null end)
               },
               "geyser_custom_y": (if .display.firstperson_lefthand.rotation then {
