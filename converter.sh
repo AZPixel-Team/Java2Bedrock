@@ -956,8 +956,8 @@ do
                 "rotation": [0, 0, (.display.thirdperson_lefthand.rotation[2])]
               } else null end),
               "geyser_custom": {
-                "rotation": [90, 0, 180],
-                "position": [16, 23, -3]
+                "rotation": [90, 0, 0],
+                "position": [0, 13, -3]
               }
             }
           },
@@ -1010,8 +1010,8 @@ do
                 "scale": 1.5
               },
               "geyser_custom_x": {
-                "position": (if .display.firstperson_lefthand.translation then [((.display.firstperson_lefthand.translation[0]) + 20), (.display.firstperson_lefthand.translation[1]), (- .display.firstperson_lefthand.translation[2])] else null end),
-                "rotation": (if .display.firstperson_lefthand.rotation then [(.display.firstperson_lefthand.rotation[0]), 0, 180] else [0.1, 0.1, 0.1] end),
+                "position": (if .display.firstperson_lefthand.translation then [(.display.firstperson_lefthand.translation[0]), (.display.firstperson_lefthand.translation[1]), (- .display.firstperson_lefthand.translation[2])] else null end),
+                "rotation": (if .display.firstperson_lefthand.rotation then [(- .display.firstperson_lefthand.rotation[0]), 0, 0] else [0.1, 0.1, 0.1] end),
                 "scale": (if .display.firstperson_lefthand.scale then (.display.firstperson_lefthand.scale) else null end)
               },
               "geyser_custom_y": (if .display.firstperson_lefthand.rotation then {
