@@ -4,7 +4,7 @@ https://discord.gg/uRNPQhkENk
 
 ## Usage
 
-**Please disable itemadder protection unzip and if you use dropbox please set dl=1 at the end of the path**
+**Please disable itemadder protection unzip**
 
 ### Donate
 
