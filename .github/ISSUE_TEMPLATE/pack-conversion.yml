@@ -156,7 +156,7 @@ body:
     attributes:
       label: Shield Conversion
       description: |
-        Conversion Shield default `false`.
+        Conversion Shield default `false`, **Not ready for use**
       options:
         - 'true'
         - 'false'
