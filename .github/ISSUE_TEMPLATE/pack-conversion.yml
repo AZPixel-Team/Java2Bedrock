@@ -129,7 +129,7 @@ body:
     attributes:
       label: Meg3 Fix
       description: |
-        Fix Black Model for MEG3 need `entity_emissive_alpha_one_sided` default `false`.
+        Fix Black Model for MEG3 default `false`.
       options:
         - 'true'
         - 'false'
