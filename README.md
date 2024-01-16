@@ -1,6 +1,28 @@
+### Todo-List
+  - Support custom gui and skip font. Example code for file to make it:
+    ```
+    [
+      "\uE200":{
+        "skip": true 
+      },
+      "0xE201":{
+        "skip": true,
+        "gui": [0, 6]
+      },
+      "":{
+        "skip": false,
+        "gui": [0, 16]
+      }
+      // if skip is not set and gui is set, then the font will skip and the gui will be executed
+    ]
+    ```
+## Support
+
+https://discord.gg/uRNPQhkENk
+
 ## Usage
 
-**Please disable itemadder protection unzip and if you use dropbox please set dl=1 at the end of the path**
+**Please disable itemadder protection unzip**
 
 ### Donate
 

@@ -129,7 +129,7 @@ body:
     attributes:
       label: Meg3 Fix
       description: |
-        Fix Black Model for MEG3 need `entity_emissive_alpha_one_sided` default `false`.
+        Fix Black Model for MEG3 default `false`.
       options:
         - 'true'
         - 'false'
@@ -156,7 +156,7 @@ body:
     attributes:
       label: Shield Conversion
       description: |
-        Conversion Shield default `false`.
+        Conversion Shield default `false`, **Not ready for use**
       options:
         - 'true'
         - 'false'
