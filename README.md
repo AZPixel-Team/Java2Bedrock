@@ -1,4 +1,6 @@
 ### Todo-List
+  - Support Custom Block
+  - Fix shield
   - Support custom gui and skip font. Example code for file to make it:
     ```
     [
