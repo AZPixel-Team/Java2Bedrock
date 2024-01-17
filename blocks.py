@@ -12,7 +12,7 @@ for file in files:
     file = file.replace("\\", "/")
     block = (file.split("/")[-1]).replace(".json", "")
     if (block == "fire"): continue
-    block_material = "alpha_test" #os.getenv("BLOCK_MATERIAL")
+    block_material = os.getenv("BLOCK_MATERIAL")
     blocks_util.write_mapping_block(block)
     with open(file, "r") as f:
         data = json.load(f)["variants"]
