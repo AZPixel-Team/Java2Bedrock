@@ -21,3 +21,6 @@ except Exception as e: print(e)
 try:
     if os.getenv("SHIELD_CONVERSION") == "true": import shield
 except Exception as e: print(e)
+try:
+    if os.getenv("BLOCK_CONVERSION") == "true": import armor
+except Exception as e: print(e)

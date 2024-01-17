@@ -160,6 +160,15 @@ body:
       options:
         - 'true'
         - 'false'
+  - type: dropdown
+    id: block-conversion
+    attributes:
+      label: Block Conversion
+      description: |
+        Conversion Block default `false`
+      options:
+        - 'true'
+        - 'false'
   - type: checkboxes
     id: terms
     attributes:

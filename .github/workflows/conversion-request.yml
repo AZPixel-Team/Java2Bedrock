@@ -26,6 +26,7 @@ jobs:
       sounds_conversion: ${{ steps.organize-inputs.outputs.SOUNDS_CONVERSION }}
       bow_conversion: ${{ steps.organize-inputs.outputs.BOW_CONVERSION }}
       shield_conversion: ${{ steps.organize-inputs.outputs.SHIELD_CONVERSION }}
+      block_conversion: ${{ steps.organize-inputs.outputs.BLOCK_CONVERSION }}
     steps:
       - name: Issue Forms Body Parser
         id: parse-issue
@@ -50,7 +51,8 @@ jobs:
             "meg3_fix": test_input(.["meg3-fix"].text; "false"),
             "sounds_conversion": test_input(.["sounds-conversion"].text; "false"),
             "bow_conversion": test_input(.["bow-conversion"].text; "false"),
-            "shield_conversion": test_input(.["shield-conversion"].text; "false")
+            "shield_conversion": test_input(.["shield-conversion"].text; "false"),
+            "block_conversion": test_input(.["block-conversion"].text; "false")
           }' > inputs.json
           echo "PACK_URL=$(jq -r '.pack_url' inputs.json)" >> $GITHUB_OUTPUT
           echo "DEFAULT_PACK_URL=$(jq -r '.default_pack_url' inputs.json)" >> $GITHUB_OUTPUT
@@ -66,6 +68,7 @@ jobs:
           echo "SOUNDS_CONVERSION=$(jq -r '.sounds_conversion' inputs.json)" >> $GITHUB_OUTPUT
           echo "BOW_CONVERSION=$(jq -r '.bow_conversion' inputs.json)" >> $GITHUB_OUTPUT
           echo "SHIELD_CONVERSION=$(jq -r '.bow_conversion' inputs.json)" >> $GITHUB_OUTPUT
+          echo "BLOCK_CONVERSION=$(jq -r '.block_conversion' inputs.json)" >> $GITHUB_OUTPUT
           
   convert-pack:
     runs-on: ubuntu-latest
@@ -118,6 +121,7 @@ jobs:
           SOUNDS_CONVERSION: ${{ needs.get-pack-info.outputs.sounds_conversion }}
           BOW_CONVERSION: ${{ needs.get-pack-info.outputs.bow_conversion }}
           SHIELD_CONVERSION: ${{ needs.get-pack-info.outputs.shield_conversion }}
+          BLOCK_CONVERSION: ${{ needs.get-pack-info.outputs.block_conversion }}
         run: |
           mkdir -p staging
           cp converter.sh staging/
