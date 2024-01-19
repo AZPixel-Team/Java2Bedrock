@@ -22,5 +22,5 @@ try:
     if os.getenv("SHIELD_CONVERSION") == "true": import shield
 except Exception as e: print(e)
 try:
-    if os.getenv("BLOCK_CONVERSION") == "true": import block
+    if os.getenv("BLOCK_CONVERSION") == "true": import blocks
 except Exception as e: print(e)
