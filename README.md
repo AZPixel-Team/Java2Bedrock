@@ -1,3 +1,7 @@
+## Support
+
+https://discord.gg/uRNPQhkENk
+
 ### Todo-List
   - Support Custom Block (Ready for test and use)
   - Fix shield
@@ -18,10 +22,6 @@
       // if skip is not set and gui is set, then the font will skip and the gui will be executed
     ]
     ```
-## Support
-
-https://discord.gg/uRNPQhkENk
-
 ## Usage
 
 **Please disable itemadder protection unzip**
