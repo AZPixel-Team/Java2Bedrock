@@ -1,4 +1,4 @@
-## Support
+## Support (we have stopped updating - we are preparing for a new project)
 
 https://discord.gg/uRNPQhkENk
 
