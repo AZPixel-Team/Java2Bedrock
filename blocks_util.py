@@ -46,11 +46,11 @@ def get_geometry_block(model: str):
     geometry_file = glob.glob(f"staging/target/rp/models/blocks/{namespace}/{path}.json")[0]
     if geometry_file != None:
         with open(geometry_file, "r") as f:
-            check = f.read()
-        if check == "":
-            os.remove(geometry_file)
-            return "geometry.cube"
-        else:
-            data = json.load(f)
-            return data["minecraft:geometry"]["description"]["identifier"]
+            geo_data = f.read()
+            if geo_data == "":
+                os.remove(geometry_file)
+                return "geometry.cube"
+            else:
+                data = json.loads(geo_data)
+                return data["minecraft:geometry"]["description"]["identifier"]
     else: return "geometry.cube"
