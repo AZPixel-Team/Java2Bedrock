@@ -52,5 +52,5 @@ def get_geometry_block(model: str):
                 return "geometry.cube"
             else:
                 data = json.loads(geo_data)
-                return data["minecraft:geometry"]["description"]["identifier"]
+                return data["minecraft:geometry"][0]["description"]["identifier"]
     else: return "geometry.cube"
