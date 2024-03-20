@@ -21,7 +21,7 @@ for file in files:
                 sounds = data[name]["sounds"]
                 listsound = []
                 for sound in sounds:
-                    try:
+                    if True:#try:
                         if type(sound).__name__  == "dict":
                             sound["name"]
                             b = (sound["name"].split(":")[-1] + ".ogg").split((sound['name'].split(':')[-1] + ".ogg").split("/")[-1])[0]
@@ -35,7 +35,7 @@ for file in files:
                             shutil.copyfile(f"pack/assets/minecraft/sounds/{sound.split(':')[-1]}.ogg", f"staging/target/rp/sounds/{sound.split(':')[-1]}.ogg")
                             a = "sounds/" + sound.split(":")[-1]
                             listsound.append(a)
-                    except Exception as e:
-                        print(e)
+                    #except Exception as e:
+                        #print(e)
                 dj["sound_definitions"][f"{namespace}:{name}"]["sounds"] = listsound
                 json.dump(dj, f, indent=2)
