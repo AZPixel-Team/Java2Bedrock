@@ -9,7 +9,7 @@ if os.path.exists("pack/assets/minecraft/models/item/bow.json"):
         predicate = [d["predicate"] for d in data["overrides"]]
         model = [d["model"] for d in data["overrides"]]
     for m, p in zip(model, predicate):
-        if m in ["item/bow", "item/bow_pulling_0", "item/bow_pulling_1", "item/bow_pulling_2"]:
+        if m in ["item/bow", "item/bow_pulling_0", "item/bow_pulling_1", "item/bow_pulling_2"] or not "custom_model_data" in p:
             continue
         i = 0
         try:
