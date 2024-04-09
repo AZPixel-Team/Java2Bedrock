@@ -17,7 +17,8 @@ for file in files:
     with open(file, "r") as f:
         data = json.load(f)["variants"]
         for k, v in data.items():
-            if not("block/original" in v["model"]):
+            if not("block/original" in v["model"] or "block/tripwire_attached_n" in v["model"]):
+                print(v["model"])
                 am = blocks_util.get_am_file(v["model"])
                 if am == None: continue
                 with open(am, "r") as f:
@@ -30,4 +31,7 @@ for file in files:
                         data_am["minecraft:attachable"]["description"]["geometry"]["default"] = "geometry.cube"
                         data_am["minecraft:attachable"]["description"]["animations"] = {"thirdperson_main_hand":"animation.geo_cube.thirdperson_main_hand","thirdperson_off_hand":"animation.geo_cube.thirdperson_off_hand","thirdperson_head":"animation.geo_cube.head","firstperson_main_hand":"animation.geo_cube.firstperson_main_hand","firstperson_off_hand":"animation.geo_cube.firstperson_off_hand","firstperson_head":"animation.geyser_custom.disable"}
                         json.dump(data_am, f)
+                if block == "tripwire":
+                    sstate = k.split(",")
+                    k = f"{sstate[0]},{sstate[4]},{sstate[1]},{sstate[2]},{sstate[6]},{sstate[3]},{sstate[5]}"
                 blocks_util.regsister_block(block, gmdl, k, texture, block_material, geometry)
