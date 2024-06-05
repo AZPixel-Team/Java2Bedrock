@@ -84,7 +84,7 @@ jobs:
           fetch-depth: 0
       - name: Enable default asset cache
         id: cache-default-assets
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           path: /home/runner/work/java2bedrock.sh/java2bedrock.sh/staging/default_assets.zip
           key: ${{ runner.os }}-${{ needs.get-pack-info.outputs.default_assets_version }}
@@ -153,7 +153,7 @@ jobs:
     steps:
       - name: Post Result
         id: post-result
-        uses: peter-evans/create-or-update-comment@v2
+        uses: peter-evans/create-or-update-comment@v4
         with:
           issue-number: ${{ github.event.issue.number }}
           body: |
@@ -181,7 +181,7 @@ jobs:
     steps:
       - name: Post Result
         id: post-result
-        uses: peter-evans/create-or-update-comment@v2
+        uses: peter-evans/create-or-update-comment@v4
         with:
           issue-number: ${{ github.event.issue.number }}
           body: |
