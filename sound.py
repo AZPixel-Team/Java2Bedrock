@@ -1,6 +1,7 @@
 import json, glob, os, shutil
 
 files = glob.glob("pack/assets/**/sounds.json")
+print(f"Sounds Files: {files}"
 os.makedirs("staging/target/rp/sounds", exist_ok=True)
 with open("staging/target/rp/sounds/sound_definitions.json", "w") as f:
     f.write('{"format_version": "1.14.0", "sound_definitions": {}}')
