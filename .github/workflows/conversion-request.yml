@@ -28,8 +28,6 @@ jobs:
       shield_conversion: ${{ steps.organize-inputs.outputs.SHIELD_CONVERSION }}
       block_conversion: ${{ steps.organize-inputs.outputs.BLOCK_CONVERSION }}
     steps:
-      - name: Test
-        run: jq --version
       - name: Issue Forms Body Parser
         id: parse-issue
         uses: zentered/issue-forms-body-parser@v2.2.0
