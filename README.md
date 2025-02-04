@@ -1,6 +1,5 @@
-## Support (we have stopped updating - we are preparing for a new project)
-
-https://discord.gg/uRNPQhkENk
+## New Project
+[Furnace](https://discord.gg/4jvpVGpeBE)
 
 ### Todo-List
   - Support Custom Block (Ready for test and use)
