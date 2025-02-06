@@ -98,8 +98,8 @@ jobs:
           python-version: '3.11'
       - name: Install dependencies
         run: |
-          sudo apt-get install -y moreutils zip
-          yarn global add spritesheet-js
+          sudo apt-get install -y moreutils zip jp
+          npm i -g spritesheet-js
           sudo apt-get install -y imagemagick
           pip install Pillow
           pip install requests
