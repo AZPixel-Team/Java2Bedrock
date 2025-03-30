@@ -6,7 +6,7 @@ on:
 
 jobs:
   get-pack-info:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-latest
     if: github.event.label.name == 'conversion'
     permissions:
       issues: read
@@ -71,7 +71,7 @@ jobs:
           echo "BLOCK_CONVERSION=$(jq -r '.block_conversion' inputs.json)" >> $GITHUB_OUTPUT
           
   convert-pack:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-latest
     needs: get-pack-info
     permissions:
       contents: read
@@ -96,18 +96,12 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: '3.11'
-      - name: Add PPA for Ghostscript 10
-        run: |
-          sudo add-apt-repository ppa:ubuntu-gis/ppa
-          sudo apt-get update
       - name: Install dependencies
         run: |
-          sudo apt-get install -y moreutils zip
+          sudo apt-get update || sudo apt-get update --fix-missing
+          sudo apt-get install -y moreutils zip imagemagick
           yarn global add spritesheet-js
-          sudo apt-get install -y imagemagick
-          pip install Pillow
-          pip install requests
-          pip install jproperties
+          pip install Pillow requests jproperties
       - name: Convert Pack
         id: convert-pack
         continue-on-error: false
@@ -150,7 +144,7 @@ jobs:
             staging/target/scratch_files.zip
             staging/config.json
   post-result:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-latest
     needs: convert-pack
     timeout-minutes: 2
     permissions:
@@ -177,7 +171,7 @@ jobs:
         with:
           issue-number: ${{ github.event.issue.number }}
   conversion-failed:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-latest
     needs: [get-pack-info, convert-pack, post-result]
     if: always() && (needs.get-pack-info.result == 'failure' || needs.convert-pack.result == 'failure' || needs.convert-pack.result == 'post-result')
     timeout-minutes: 2
