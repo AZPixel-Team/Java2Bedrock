@@ -6,7 +6,7 @@ on:
 
 jobs:
   get-pack-info:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     if: github.event.label.name == 'conversion'
     permissions:
       issues: read
@@ -71,7 +71,7 @@ jobs:
           echo "BLOCK_CONVERSION=$(jq -r '.block_conversion' inputs.json)" >> $GITHUB_OUTPUT
           
   convert-pack:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     needs: get-pack-info
     permissions:
       contents: read
@@ -150,7 +150,7 @@ jobs:
             staging/target/scratch_files.zip
             staging/config.json
   post-result:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     needs: convert-pack
     timeout-minutes: 2
     permissions:
@@ -177,7 +177,7 @@ jobs:
         with:
           issue-number: ${{ github.event.issue.number }}
   conversion-failed:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     needs: [get-pack-info, convert-pack, post-result]
     if: always() && (needs.get-pack-info.result == 'failure' || needs.convert-pack.result == 'failure' || needs.convert-pack.result == 'post-result')
     timeout-minutes: 2
