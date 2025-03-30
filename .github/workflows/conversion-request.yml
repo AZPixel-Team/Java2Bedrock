@@ -96,6 +96,10 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: '3.11'
+      - name: Add PPA for Ghostscript 10
+        run: |
+          sudo add-apt-repository ppa:ubuntu-gis/ppa
+          sudo apt-get update
       - name: Install dependencies
         run: |
           sudo apt-get install -y moreutils zip
