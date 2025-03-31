@@ -98,12 +98,10 @@ jobs:
           python-version: '3.11'
       - name: Install dependencies
         run: |
-          sudo apt-get install -y moreutils zip
+          sudo apt-get update || sudo apt-get update --fix-missing
+          sudo apt-get install -y moreutils zip imagemagick
           yarn global add spritesheet-js
-          sudo apt-get install -y imagemagick
-          pip install Pillow
-          pip install requests
-          pip install jproperties
+          pip install Pillow requests jproperties
       - name: Convert Pack
         id: convert-pack
         continue-on-error: false

@@ -1,5 +1,18 @@
-## New Project
-[Furnace](https://discord.gg/4jvpVGpeBE)
+### This project is no longer maintained. Check out our new project below!  
+
+## Furnace – Resource Pack Conversion Tool  
+
+### How to Use  
+
+- Join our Discord [here](https://discord.gg/4jvpVGpeBE).  
+- Upload your Java resource pack to the designated support channel.  
+- Furnace bot automatically processes the file and converts it to a Geyser-compatible format.  
+- Download and use the converted pack in Minecraft Bedrock via Geyser.  
+
+### Contact & Support  
+
+- Join our Discord: [Furnace Discord](https://discord.gg/4jvpVGpeBE) for updates and assistance.  
+- Community Discussions: Share feedback, report issues, and suggest improvements directly on our server.  
 
 ### Todo-List
   - Support Custom Block (Ready for test and use)
